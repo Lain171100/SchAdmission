@@ -1,6 +1,7 @@
 <?php
     include('connect.php');
     include('autoid_functions.php');
+    include('admin_header.php');
 ?>
 
 <!DOCTYPE html>
@@ -10,6 +11,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Staff Registration Form</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <form action="staff_table.php" method="POST" enctype="multipart/form-data">
@@ -65,10 +69,10 @@
             </div>
 
             <div>
-                <label for="image">Image:</label>
-                <input type="file" class="form-control" name="txtstaffimage" required>
+                <label for="image">Image:</label> <br>
+                <input type="file" class="" name="txtstaffimage" required>
             </div>
-            
+            <br>
             <div>
                 <input class="btn btn-primary" type="submit" name="btnsave" value="Save">
                 <input class="btn btn-danger" type="reset" name="btncancel" value="Cancel" onclick="location.href='staff_table.php' ">

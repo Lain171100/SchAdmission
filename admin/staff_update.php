@@ -1,6 +1,7 @@
 <?php
     
     include('connect.php');
+    include('admin_header.php');
 
     if(isset($_GET['staffid']))
     {
@@ -13,13 +14,6 @@
         $query=mysqli_query($connection,$sql);
         $count=mysqli_fetch_array($query);
 
-
-        // $staffroleid=$count['staffroleid'];
-        // $strsql="SELECT * FROM staffrole
-        //          WHERE staffroleid='$staffroleid' ";
-        
-        // $strquery=mysqli_query($connection,$strsql);
-        // $arr=mysqli_fetch_array($strquery);
         
 
     }
@@ -28,6 +22,7 @@
     {
         $txtsid=$_POST['txtsid'];
         $txtstaffname=$_POST['txtstaffname'];
+        
         $cborole=substr($_POST['cborole'],0,9);
         $txtemail=$_POST['txtemail'];
         $txtaddress=$_POST['txtaddress'];
@@ -60,7 +55,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Staff Update</title>
-
+    <!-- Link -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
@@ -82,7 +80,7 @@
         <div>
             <label for="">Staff Role:</label>
             <select name="cborole" class="custom-select" value="<?= $count['stafftypeid'] ?>">
-                <option ><?= $count['stafftypeid']. "~". $count['stafftype'] ?></option>
+                <option value='$stafftypeid'><?= $count['stafftypeid']. "~". $count['stafftype'] ?></option>
                     <?php
                         $srolesql="SELECT * FROM stafftype";
                         $srolequery=mysqli_query($connection,$srolesql);
@@ -91,7 +89,7 @@
                         for($i=0; $i<$srolecount; $i++)
                         {
                             $arr=mysqli_fetch_array($srolequery);
-                            $staffroleid=$arr['stafftypeid'];
+                            $stafftypeid=$arr['stafftypeid'];
                             $stafftype=$arr['stafftype'];
                             $strid=$count['stafftypeid'];
                             
@@ -121,8 +119,9 @@
             <label for="">Phone Number:</label>
             <input class="form-control" type="text" name="txtphnumber" pattern="^[0-9]{10,12}$" value="<?= $count['staffphnumber'] ?>" placeholder="Enter Your Phone Number" required>
         </div>
-
-        <div align="center">
+        
+        <br>
+        <div>
             <input class="btn btn-info" type="submit" name="btnupdate" value="Update">
             <input class="btn btn-danger" type="reset" name="btncancel" value="Cancel" onclick="location.href='staff_table.php' ">
         </div>

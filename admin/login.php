@@ -33,28 +33,28 @@
                     $_SESSION['stafftypeid']=$arr['stafftypeid'];
 
                     echo "<script>alert('Login Successfully')</script>";
-                    echo "<script>window.location='adminhomepage.php'</script>";
+                    echo "<script>window.location='admin_dashboard.php'</script>";
                 }
-                if ($role=="Manager")
+                if ($role=="Teacher")
                 {
                     $_SESSION['staffid']=$arr['staffid'];
                     $_SESSION['staffname']=$arr['staffname'];
                     $_SESSION['staffimage']=$arr['staffimage'];
-                    $_SESSION['staffroleid']=$arr['staffroleid'];
+                    $_SESSION['stafftypeid']=$arr['stafftypeid'];
 
                     echo "<script>alert('Login Successfully')</script>";
-                    echo "<script>window.location='managerhomepage.php'</script>";
+                    echo "<script>window.location='teacher_dashboard.php'</script>";
                 }
 
-                if ($role=="Manager Assistance")
+                if ($role=="Staff")
                 {
                     $_SESSION['staffid']=$arr['staffid'];
                     $_SESSION['staffname']=$arr['staffname'];
                     $_SESSION['staffimage']=$arr['staffimage'];
-                    $_SESSION['staffroleid']=$arr['staffroleid'];
-
+                    $_SESSION['stafftypeid']=$arr['stafftypeid'];
+                    
                     echo "<script>alert('Login Successfully')</script>";
-                    echo "<script>window.location='massistancehome.php'</script>";
+                    echo "<script>window.location='staff_dashboard.php'</script>";
 
                 }
             }
@@ -75,28 +75,62 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Log In</title>
+    <!-- Link -->
+    <!-- Font Awesome -->
+    <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    rel="stylesheet"
+    />
+    <!-- Google Fonts -->
+    <link
+    href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+    rel="stylesheet"
+    />
+    <!-- MDB -->
+    <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.1/mdb.min.css"
+    rel="stylesheet"
+    />
 </head>
 
 <body>
     <form action="login.php" method="POST" enctype="multipart/form-data">
-        <h2>Welcome To NCNU's Admission</h2>
-        <div>
-            <label for="email">Email</label>
-            <input type="email" name="txtemail" required/>
+
+        <section class="vh-100" style="background-color: #508bfc;">
+        <!-- <h2 align="center">Welcome To NCNU's Admission</h2> -->
+        <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+            <div class="card shadow-2-strong" style="border-radius: 1rem;">
+            <div class="card-body p-5 text-center">
+
+                <h3 class="mb-5">Log in</h3>
+
+                <div class="form-outline mb-4">
+                <input type="email" name="txtemail" id="typeEmailX-2" class="form-control form-control-lg"  required />
+                <label class="form-label" for="typeEmailX-2" >Email</label>
+                </div>
+
+                <div class="form-outline mb-4">
+                <input type="password" name="txtpassword" id="typePasswordX-2" class="form-control form-control-lg" required />
+                <label class="form-label" for="typePasswordX-2">Password</label>
+                </div>
+
+                <button class="btn btn-primary btn-lg btn-block" type="submit" name="btnlogin">Login</button>
+
+            </div>
+            </div>
         </div>
-
-        <div>
-            <label for="password">Password</label>
-            <input type="password" name="txtpassword" required/>
         </div>
+    </div>
+    </section>
 
-        <!-- Link -->
-        <p>Haven't had an Account?</p>
-        <a href="#">Create an Account</a>
-
-        <!-- Button -->
-        <input type="submit" value="Log In" name="btnlogin">
     </form>
 </body>
 
+<!-- MDB -->
+<script
+  type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.1/mdb.min.js"
+></script>
 </html>

@@ -1,7 +1,9 @@
 <?php
-
+   
     include('connect.php');
     include('autoid_functions.php'); 
+    include('admin_header.php');
+
 
     if(isset($_POST['btnsave']))
     {   
@@ -25,8 +27,10 @@
             if(!$copied)
             {
                 echo "<p>Cannot Upload Photo</p>";
+                exit();
             }
         }
+  
 
         // --- Check Duplicate Email --- //
         $checkemail="SELECT * FROM staff
@@ -66,6 +70,14 @@
 
 <html>
     <body>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
+        <link rel="stylesheet" href="css/style.css">
+
+        <!-- Data Table -->
+        <script type="text/javascript" src="js/jquery-3.1.1.slim.min.js"></script>
+	    <script type="text/javascript" src="DataTable/datatables.min.js"></script>
+	    <link rel="stylesheet" type="text/css" href="DataTable/datatables.min.css"/>
 
         <legend align="center">Staff Data Lists</legend>
 
@@ -78,9 +90,10 @@
 	    </script>
 
         <div>
-        <a href="staffregister.php" class="btn btn-primary"><img src="https://img.icons8.com/ios/20/000000/plus--v1.png"/> Staff Form</a>  <br><br>
+        <a href="staffregister.php" class="btn btn-outline-primary"><img src="https://img.icons8.com/ios/25/000000/plus--v1.png"/>  Staff Form</a>  <br><br>
         </div>     
-
+        
+        <div class="table-responsive">
         <table align="center" id="tableid" cellspacing="5px" cellpadding="5px" class="table table-hover">
             <thead>
                 <tr>
@@ -131,8 +144,8 @@
                         echo "<td> <img src='$staffimage' width='100px' height='100px'> </td>";
 
                         echo "<td>
-                                <a href='staff_update.php?staffid=$staffid' class='btn btn-secondary'>Update</a> <br>                              
-                                <a href='staff_delete.php?staffid=$staffid' class='btn btn-danger'>Delete</a>
+                                <a href='staff_update.php?staffid=$staffid' class='btn btn-outline-info'>Update</a> <br> <br>                             
+                                <a href='staff_delete.php?staffid=$staffid' class='btn btn-outline-danger'>Delete</a>
                               </td>";
 
                         echo "</tr>";
@@ -140,7 +153,7 @@
                 ?>
             </tbody>
         </table>
-       
+       </main>
     </body>
 </html>
 

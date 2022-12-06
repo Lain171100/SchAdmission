@@ -1,6 +1,9 @@
 <?php
     include('connect.php');
     include('autoid_functions.php');
+  
+    include('admin_header.php');
+
 
     if(isset($_POST['btnsave']))
     {
@@ -26,8 +29,15 @@
 <html>
     
 <body>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
+        <link rel="stylesheet" href="css/style.css">
 
-    <!-- Data Table -->
+        <!-- Data Table -->
+        <script type="text/javascript" src="js/jquery-3.1.1.slim.min.js"></script>
+	    <script type="text/javascript" src="DataTable/datatables.min.js"></script>
+	    <link rel="stylesheet" type="text/css" href="DataTable/datatables.min.css"/>
+    <!-- Data Table Table -->
     <legend align="center">Staff Type Data</legend>
 
     <script>
@@ -38,7 +48,7 @@
 	</script>
 
     <div>
-        <a href="stafftype_insert.php" class="btn btn-primary"><img src="https://img.icons8.com/ios/20/000000/plus--v1.png"/> Staff Type Form</a> 
+        <a href="stafftype_insert.php" class="btn btn-outline-primary"><img src="https://img.icons8.com/ios/20/000000/plus--v1.png"/> Staff Type Form</a> 
         <br><br>
     </div>
 
@@ -70,8 +80,8 @@
                     echo "<td>$stafftype</td>";
                     
                     echo "<td>
-                          <a href='stafftype_update.php?stafftypeid=$stafftypeid' class='btn btn-secondary'>Update</a>
-                          <a href='stafftypedelete.php?stafftypeid=$stafftypeid' class='btn btn-danger'>Delete</a>
+                          <a href='stafftype_update.php?stafftypeid=$stafftypeid' class='btn btn-outline-info'>Update</a> &nbsp;
+                          <a href='stafftypedelete.php?stafftypeid=$stafftypeid' class='btn btn-outline-danger'>Delete</a>
                           </td>";
 
                     echo "</tr>";
@@ -80,6 +90,8 @@
         
         </tbody>
     </table>
+
+    <!--  -->
 </body>
 </html>
 
