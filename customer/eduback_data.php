@@ -1,60 +1,8 @@
 <?php
-
+    session_start();
     include('connect.php');
     include('autoid_functions.php'); 
     include('../admin/teacher_header.php');
-
-    if(isset($_POST['btnsave']))
-    {   
-        $txteid=$_POST['txteid'];
-        $txthname=$_POST['txthname'];
-        $txthlocation=$_POST['txthlocation'];
-        $txthdegree=$_POST['txthdegree'];
-        $txthdate=$_POST['txthdate'];
-        $txthmajor=$_POST['txthmajor'];
-        $txthminor=$_POST['txthminor'];
-        $txthgpa=$_POST['txthgpa'];
-        // 
-        $txtuname=$_POST['txtuname'];
-        $txtulocation=$_POST['txtulocation'];
-        $txtudegree=$_POST['txtudegree'];
-        $txtudate=$_POST['txtudate'];
-        $txtumajor=$_POST['txtumajor'];
-        $txtuminor=$_POST['txtuminor'];
-        $txtugpa=$_POST['txtugpa'];
-        // 
-        $txtmname=$_POST['txtmname'];
-        $txtmlocation=$_POST['txtmlocation'];
-        $txtmdegree=$_POST['txtmdegree'];
-        $txtmdate=$_POST['txtmdate'];
-        $txtmmajor=$_POST['txtmmajor'];
-        $txtmminor=$_POST['txtmminor'];
-        $txtmgpa=$_POST['txtmgpa'];
-        // 
-        $txtdname=$_POST['txtdname'];
-        $txtdlocation=$_POST['txtdlocation'];
-        $txtddegree=$_POST['txtddegree'];
-        $txtddate=$_POST['txtddate'];
-        $txtdmajor=$_POST['txtdmajor'];
-        $txtdminor=$_POST['txtdminor'];
-        $txtdgpa=$_POST['txtdgpa'];
-
-    // --- Insert Program Data to Table --- //
-        $query="INSERT INTO eduback (eid, hname, hlocation, hdegree, hdate, hmajor, hminor, hgpa, uname, ulocation, udegree, udate, umajor, uminor, ugpa, mname, mlocation, mdegree, mdate, mmajor, mminor, mgpa, dname, dlocation, ddegree, ddate, dmajor, dminor, dgpa)
-                VALUES ('$txteid','$txthname','$txthlocation','$txthdegree','$txthdate','$txthmajor','$txthminor','$txthgpa','$txtuname','$txtulocation','$txtudegree','$txtudate','$txtumajor','$txtuminor','$txtugpa','$txtmname','$txtmlocation','$txtmdegree','$txtmdate','$txtmmajor','$txtmminor','$txtmgpa','$txtdname','$txtdlocation','$txtddegree','$txtddate','$txtdmajor','$txtdminor','$txtdgpa')";
-        $result=mysqli_query($connection,$query);
-
-        if($result)
-        {
-            echo "<script>window.alert('Education Background Acccount Successfully Created.')</script>";
-        }
-        else
-        {
-            echo "<p>Something went wrong in Education Background Data Insert " . mysqli_error($connection) . "</p>";
-        }
-        
-    }
-
     
 
 
@@ -81,9 +29,9 @@
 		} );
 	    </script>
 
-        <div>
+        <!-- <div>
         <a href="eduback_insert.php" class="btn btn-primary"><img src="https://img.icons8.com/ios/20/000000/plus--v1.png"/> Education Background Registration Form</a>  <br><br>
-        </div>     
+        </div>      -->
 
         <div class="table-responsive">
         <table align="center" id="tableid" cellspacing="5px" cellpadding="5px" class="table table-hover">

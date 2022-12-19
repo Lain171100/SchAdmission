@@ -32,9 +32,9 @@
     <legend align="center"><h1>Student Data</h1></legend>
 
     <!-- Insert -->
-    <div>
-        <a href="customer_insert.php" class="btn btn-primary"><img src="https://img.icons8.com/ios/20/000000/plus--v1.png"/> Student Registration Form</a>  <br><br>
-    </div> 
+    <!-- <div>
+        <a href="student_insert.php" class="btn btn-primary"><img src="https://img.icons8.com/ios/20/000000/plus--v1.png"/> Student Registration Form</a>  <br><br>
+    </div>  -->
     <!--  -->
     <div class="table-responsive">
         <table align="center" id="tableid" cellspacing="5px" cellpadding="5px" class="table table-hover">

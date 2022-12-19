@@ -8,20 +8,31 @@
 
   <head>
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
 
-    <title>National ChiNan University Admission Website</title>
+    <title>NCNU Website</title>
+
+    <style>
+      img{
+        width:100px;
+        height:200px;
+        object-fit:cover;
+      }
+
+      .msg{
+        height:200px;
+      }
+    </style>
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Additional CSS Files -->
     <link rel="stylesheet" href="assets/css/fontawesome.css">
-    <link rel="stylesheet" href="assets/css/templatemo-sixteen.css">
+    <link rel="stylesheet" href="assets/css/ncnu.css">
     <link rel="stylesheet" href="assets/css/owl.css">
 
   </head>
@@ -42,30 +53,39 @@
     <header class="">
       <nav class="navbar navbar-expand-lg">
         <div class="container">
-          <a class="navbar-brand" href="index.html"><h2>Sixteen <em>Clothing</em></h2></a>
+          <a class="navbar-brand" href="home_page.php"><h2>NCNU <em>國立暨南國際大學</em></h2></a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
               <li class="nav-item active">
-                <a class="nav-link" href="index.html">Home
+                <a class="nav-link" href="home_page.php">Home
                   <span class="sr-only">(current)</span>
               </a>
               <li class="nav-item">
-                <a class="nav-link" href="about.html">About Us</a>
+                <a class="nav-link" href="aboutus.php">About </a>
               </li>
               </li> 
+
               <li class="nav-item">
-                <a class="nav-link" href="products.html">Admission</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="customer_insert.php">Departments</a>
+                <a class="nav-link" href="departments.php">Departments</a>
               </li>
               
               <li class="nav-item">
-                <a class="nav-link" href="contact.html">Contact Us</a>
+                <a class="nav-link" href="contact.php">Contact </a>
               </li>
+
+              <!-- Log In -->
+              <li class="nav-item">
+                <a class="nav-link" href="student_login.php">Log In (Students)</a>
+              </li>
+
+              <!-- Log In -->
+              <li class="nav-item">
+                <a class="nav-link" href="../admin/login.php">Log In (Teacher)</a>
+              </li>
+
             </ul>
           </div>
         </div>
@@ -78,20 +98,28 @@
       <div class="owl-banner owl-carousel">
         <div class="banner-item-01">
           <div class="text-content">
-            <h4>Best Offer</h4>
-            <h2>New Arrivals On Sale</h2>
+            <h2>National ChiNan University</h2>
+            
+            <a class="filled-button" href="student_login.php">Go To Admission</a>
+
           </div>
         </div>
+        <!-- Banner 2 -->
         <div class="banner-item-02">
           <div class="text-content">
-            <h4>Flash Deals</h4>
-            <h2>Get your best products</h2>
+            <h2>National ChiNan University</h2>
+            
+            <a class="filled-button" href="student_login.php">Go To Admission</a>
+
           </div>
         </div>
+        <!-- Banner 3 -->
         <div class="banner-item-03">
           <div class="text-content">
-            <h4>Last Minute</h4>
-            <h2>Grab last minute deals</h2>
+            <h2>National ChiNan University</h2>
+            
+            <a class="filled-button" href="student_login.php">Go To Admission</a>
+
           </div>
         </div>
       </div>
@@ -103,168 +131,90 @@
         <div class="row">
           <div class="col-md-12">
             <div class="section-heading">
-              <h2>Latest Products</h2>
-              <a href="products.html">view all products <i class="fa fa-angle-right"></i></a>
+              <h2>List of Departments</h2>
+              <a href="products.html">View All Departments<i class="fa fa-angle-right"></i></a>
             </div>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-4 ">
             <div class="product-item">
-              <a href="#"><img src="assets/images/product_01.jpg" alt=""></a>
-              <div class="down-content">
-                <a href="#"><h4>Tittle goes here</h4></a>
-                <h6>$25.75</h6>
-                <p>Lorem ipsume dolor sit amet, adipisicing elite. Itaque, corporis nulla aspernatur.</p>
-                <ul class="stars">
-                  <li><i class="fa fa-star"></i></li>
-                  <li><i class="fa fa-star"></i></li>
-                  <li><i class="fa fa-star"></i></li>
-                  <li><i class="fa fa-star"></i></li>
-                  <li><i class="fa fa-star"></i></li>
-                </ul>
-                <span>Reviews (24)</span>
+              <a href="https://www.csie.ncnu.edu.tw/home"><img src="assets/images/csie.jpg" alt=""></a>
+              <div class="down-content msg">
+                <a href="https://www.csie.ncnu.edu.tw/home"><h4>Department of Computer Science & Information Engineering</h4></a>
+                
+                <p>資訊工程系成立於1996年，是台灣國立暨南國際大學最早成立的系之一。我們珍視資工CS這個大家庭（學生，助理和教授）</p>
               </div>
             </div>
           </div>
           <div class="col-md-4">
             <div class="product-item">
-              <a href="#"><img src="assets/images/product_02.jpg" alt=""></a>
-              <div class="down-content">
-                <a href="#"><h4>Tittle goes here</h4></a>
-                <h6>$30.25</h6>
-                <p>Lorem ipsume dolor sit amet, adipisicing elite. Itaque, corporis nulla aspernatur.</p>
-                <ul class="stars">
-                  <li><i class="fa fa-star"></i></li>
-                  <li><i class="fa fa-star"></i></li>
-                  <li><i class="fa fa-star"></i></li>
-                  <li><i class="fa fa-star"></i></li>
-                  <li><i class="fa fa-star"></i></li>
-                </ul>
-                <span>Reviews (21)</span>
+              <a href="https://www.econ.ncnu.edu.tw/"><img src="assets/images/econ.jpg" alt="" ></a>
+              <div class="down-content msg">
+                <a href="https://www.econ.ncnu.edu.tw//"><h4>Department of Econic</h4></a>
+                <p>經濟學系 (所) 隸屬於管理學院，是國立暨南國際大學最初五個創校研究所之一。</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 msg">
+            <div class="product-item">
+              <a href="https://ch.ncnu.edu.tw/"><img src="assets/images/foreign.jpg" alt=""></a>
+              <div class="down-content msg">
+                <a href="https://ch.ncnu.edu.tw/"><h4>Department of Chinese as a Second Language</h4></a>
+                <p>大學部非在華語地區畢業者，須檢附新版華語能力測驗（TOCFL）聽讀流利級，或其他足以說明其中文能力之證明，如修習課程證明等。</p>
+                
               </div>
             </div>
           </div>
           <div class="col-md-4">
             <div class="product-item">
-              <a href="#"><img src="assets/images/product_03.jpg" alt=""></a>
-              <div class="down-content">
-                <a href="#"><h4>Tittle goes here</h4></a>
-                <h6>$20.45</h6>
-                <p>Sixteen Clothing is free CSS template provided by TemplateMo.</p>
-                <ul class="stars">
-                  <li><i class="fa fa-star"></i></li>
-                  <li><i class="fa fa-star"></i></li>
-                  <li><i class="fa fa-star"></i></li>
-                  <li><i class="fa fa-star"></i></li>
-                  <li><i class="fa fa-star"></i></li>
-                </ul>
-                <span>Reviews (36)</span>
+              <a href="https://www.epa.ncnu.edu.tw/pg.asp?theme=87"><img src="assets/images/edu.jpg" alt=""></a>
+              <div class="down-content msg">
+                <a href="https://www.epa.ncnu.edu.tw/pg.asp?theme=87"><h4>Department of Educational Policy and Administration</h4></a>
+                <p>  教育學院於 2010 年 2 月 1 日正式成立，共設置3系1所，包括：國際文教與比較教育學系、教育政策與行政學系、諮商心理與人力資源發展學系、課程教學與科技研究所等四個系所。</p>
               </div>
             </div>
           </div>
           <div class="col-md-4">
             <div class="product-item">
-              <a href="#"><img src="assets/images/product_04.jpg" alt=""></a>
-              <div class="down-content">
-                <a href="#"><h4>Tittle goes here</h4></a>
-                <h6>$15.25</h6>
-                <p>Lorem ipsume dolor sit amet, adipisicing elite. Itaque, corporis nulla aspernatur.</p>
-                <ul class="stars">
-                  <li><i class="fa fa-star"></i></li>
-                  <li><i class="fa fa-star"></i></li>
-                  <li><i class="fa fa-star"></i></li>
-                  <li><i class="fa fa-star"></i></li>
-                  <li><i class="fa fa-star"></i></li>
-                </ul>
-                <span>Reviews (48)</span>
+              <a href="https://gec.ncnu.edu.tw/"><img src="assets/images/generaledu.jpg" alt=""></a>
+              <div class="down-content msg">
+                <a href="https://gec.ncnu.edu.tw/"><h4>Department of General Education Center</h4></a>
+                <p>暨大通識教育在理念目標扣合學校發展與定位，並配合學校特色發展推動在地實踐、綠色環保、東南亞文化三大特色通識教學</p>
               </div>
             </div>
           </div>
           <div class="col-md-4">
             <div class="product-item">
-              <a href="#"><img src="assets/images/product_05.jpg" alt=""></a>
-              <div class="down-content">
-                <a href="#"><h4>Tittle goes here</h4></a>
-                <h6>$12.50</h6>
-                <p>Lorem ipsume dolor sit amet, adipisicing elite. Itaque, corporis nulla aspernatur.</p>
-                <ul class="stars">
-                  <li><i class="fa fa-star"></i></li>
-                  <li><i class="fa fa-star"></i></li>
-                  <li><i class="fa fa-star"></i></li>
-                  <li><i class="fa fa-star"></i></li>
-                  <li><i class="fa fa-star"></i></li>
-                </ul>
-                <span>Reviews (16)</span>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="product-item">
-              <a href="#"><img src="assets/images/product_06.jpg" alt=""></a>
-              <div class="down-content">
-                <a href="#"><h4>Tittle goes here</h4></a>
-                <h6>$22.50</h6>
-                <p>Lorem ipsume dolor sit amet, adipisicing elite. Itaque, corporis nulla aspernatur.</p>
-                <ul class="stars">
-                  <li><i class="fa fa-star"></i></li>
-                  <li><i class="fa fa-star"></i></li>
-                  <li><i class="fa fa-star"></i></li>
-                  <li><i class="fa fa-star"></i></li>
-                  <li><i class="fa fa-star"></i></li>
-                </ul>
-                <span>Reviews (32)</span>
+              <a href="https://www.cseas.ncnu.edu.tw/"><img src="assets/images/research.jpg" alt=""></a>
+              <div class="down-content msg">
+                <a href="https://www.cseas.ncnu.edu.tw/"><h4>Department of Southeast Asian Studies</h4></a>
+                <p>我們著重於當代東南亞政治、經濟、社會文化及族群關係之研究，和政府政策及社會需求，提供研究發現與成果予政府</p>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-
+    
+    <!-- About Us -->
     <div class="best-features">
       <div class="container">
         <div class="row">
           <div class="col-md-12">
             <div class="section-heading">
-              <h2>About Sixteen Clothing</h2>
+              <h2>About National ChiNan University</h2>
             </div>
           </div>
           <div class="col-md-6">
             <div class="left-content">
-              <h4>Looking for the best products?</h4>
-              <p><a rel="nofollow" href="https://templatemo.com/tm-546-sixteen-clothing" target="_parent">This template</a> is free to use for your business websites. However, you have no permission to redistribute the downloadable ZIP file on any template collection website. <a rel="nofollow" href="https://templatemo.com/contact">Contact us</a> for more info.</p>
-              <ul class="featured-list">
-                <li><a href="#">Lorem ipsum dolor sit amet</a></li>
-                <li><a href="#">Consectetur an adipisicing elit</a></li>
-                <li><a href="#">It aquecorporis nulla aspernatur</a></li>
-                <li><a href="#">Corporis, omnis doloremque</a></li>
-                <li><a href="#">Non cum id reprehenderit</a></li>
-              </ul>
-              <a href="about.html" class="filled-button">Read More</a>
+              <h4>Words from the President</h4>
+              <p>I hope to establish a university that focuses on modernity and well-being. Whether teaching, research, or governance, I would ensure that the university can keep up with global trends and align with international standards. In addition, faculties and students can access abundant resources to explore novel ideas, innovate across regions, and connect with industries. The aim is to improve the well-being of human beings through the provision of cross-disciplinary knowledge, and through actions that enhance education and deeply cultivate assets that will transform the future society. I look forward to welcoming you to the university.</p>
+              <p>Dr. Dong-Sing Wuu,the 8th President of National Chi Nan University</p>
+              <a href="aaaaboutus.php" class="filled-button">Read More</a>
             </div>
           </div>
           <div class="col-md-6">
             <div class="right-image">
-              <img src="assets/images/feature-image.jpg" alt="">
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-    <div class="call-to-action">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="inner-content">
-              <div class="row">
-                <div class="col-md-8">
-                  <h4>Creative &amp; Unique <em>Sixteen</em> Products</h4>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque corporis amet elite author nulla.</p>
-                </div>
-                <div class="col-md-4">
-                  <a href="#" class="filled-button">Purchase Now</a>
-                </div>
-              </div>
+              <img src="assets/images/about.jpg" alt="" height="200px">
             </div>
           </div>
         </div>
@@ -277,9 +227,10 @@
         <div class="row">
           <div class="col-md-12">
             <div class="inner-content">
-              <p>Copyright &copy; 2020 Sixteen Clothing Co., Ltd.
-            
-            - Design: <a rel="nofollow noopener" href="https://templatemo.com" target="_blank">TemplateMo</a></p>
+              <p>National ChiNan University</p>
+              <!-- Google Translate -->
+              <div id="google_translate_element"></div>
+              <!--  -->
             </div>
           </div>
         </div>
@@ -311,7 +262,15 @@
       }
     </script>
 
-
+     <script>
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement(
+                {pageLanguage: 'en'},
+                'google_translate_element'
+            );
+        }
+    </script>
+    <script src="http://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
   </body>
 
 </html>

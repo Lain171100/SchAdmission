@@ -7,12 +7,13 @@
     {
         $staffid=$_SESSION['staffid'];
 
-        $sql="SELECT * FROM staff
-              WHERE staffid='$staffid' ";
+        $sql="SELECT * FROM staff s, stafftype st
+              WHERE s.stafftypeid=st.stafftypeid
+              AND s.staffid='$staffid' ";
 
         $staffquery=mysqli_query($connection,$sql);
-        $staffcount=mysqli_num_rows($staffquery);
         $staffarray=mysqli_fetch_array($staffquery);
+        $stafftype=$staffarray['stafftype'];
 
     }
 
@@ -68,42 +69,48 @@
                 <li>
                     <a href="../admin/staff_dashboard.php">
                         <span class="ti-home"></span>
-                        <span>Staff Home</span>
+                        <span><?php echo $stafftype ?> Home</span>
                     </a>
                 </li>
                 <li>
                     <a href="../customer/student_data.php">
-                        <span class="ti-agenda"></span>
+                        <span class="ti-user"></span>
                         <span>Student's Data</span>
                     </a>
                 </li>
                 <li>
                     <a href="../customer/eduback_data.php">
-                        <span class="ti-face-smile"></span>
+                        <span class="ti-write"></span>
                         <span>Student's Education Background</span>
                     </a>
                 </li>
 
                 <li>
                     <a href="../customer/chinesepro_data.php">
-                        <span class="ti-face-smile"></span>
+                        <span class="ti-uler-pencil"></span>
                         <span>Student's Chinese Proficiency Data</span>
                     </a>
                 </li>
 
                 <li>
                     <a href="../customer/program_data.php">
-                        <span class="ti-face-smile"></span>
+                        <span class="ti-blackboard"></span>
                         <span>Student's Program Selection</span>
                     </a>
                 </li>
 
                 <li>
                     <a href="../customer/scholar_data.php">
-                        <span class="ti-face-smile"></span>
+                        <span class="ti-medall"></span>
                         <span>Student's Scholarship and Financial</span>
                     </a>
                 </li>
+
+                 <li>
+                    <a href="../customer/docsubmit_data.php">
+                        <span class="ti-book"></span>
+                        <span>Student's Documentation</span>
+                    </a>
             </ul>
         </div>
     </div>

@@ -65,12 +65,12 @@
                         <span>Staff</span>
                     </a>
                 </li>
-                <li>
+                <!-- <li>
                     <a href="searchstaff.php">
                         <span class="ti-search"></span>
                         <span>Search</span>
                     </a>
-                </li>   
+                </li>    -->
             </ul>
         </div>
     </div>
@@ -150,36 +150,6 @@
                     </div>
                 </div>
                 
-                <div class="card-single">
-                    <div class="card-body">
-                        <span class="ti-check-box"></span>
-                        <div>
-                            <h5>Total Staff & Staff Roles</h5>
-                            <h4>
-                                <?php
-                                    $sql="SELECT staffid FROM staff 
-                                            ORDER BY staffid ";
-                                    $query=mysqli_query($connection,$sql);
-
-                                    $row=mysqli_num_rows($query);
-
-                                    $sql="SELECT stafftypeid FROM stafftype
-                                          ORDER BY stafftypeid ";
-                                    $query=mysqli_query($connection,$sql);
-
-                                    $rows=mysqli_num_rows($query);
-
-                                    echo '<h2> Total = '.$row+$rows.'</h2>';
-
-                                    
-                                ?>
-                            </h4>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <a href="searchstaff.php">View all</a>
-                    </div>
-                </div>
             </div>
             
             
@@ -192,7 +162,7 @@
         
     </div>
     
-    <div align="center">Copyright @ reserved </div>
+    <div align="center">@ National ChiNan University</div>
 
 </body>
 </html>

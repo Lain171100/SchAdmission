@@ -1,6 +1,8 @@
 <?php
     
     include('connect.php');
+    include('autoid_functions.php');
+    include('../admin/teacher_header.php');
 
     if(isset($_REQUEST['slid']))
     {
@@ -22,7 +24,7 @@
         $cbofmoney=$_POST['cbofmoney'];
         $cbosmoney=$_POST['cbosmoney'];
         $cboorg=$_POST['cboorg'];
-        $rdoh=$_POST['rdoh'];
+        $cbohealth=$_POST['cbohealth'];
         $txthpbl=$_POST['txthpbl'];
         $cbowas=$_POST['cbowas'];
 
@@ -32,7 +34,7 @@
                      fmoney='$cbofmoney',
                      smoney='$cbosmoney',
                      schscholar='$cboorg',
-                     health_condi='$rdoh',
+                     health_condi='$cbohealth',
                      health_problem='$txthpbl',
                      scholar_apply='$cbowas'
                  WHERE slid='$txtslid' ";
@@ -57,10 +59,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Financial Information and Scholar Information Update</title>
-    <!-- <link rel="stylesheet" href="formstyle.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
-    <link rel="stylesheet" href="css/style.css"> -->
+    <link rel="stylesheet" href="../admin/css/style.css"> 
 </head>
 <body>
 
@@ -81,7 +82,7 @@
             <!-- Personal Saving Money -->
         <div class="">
             <label for="" class="">Choose Your Personal Saving Amount</label>
-            <select name="cbopmoney" class="">
+            <select name="cbopmoney" class="custom-select">
                 <option value="<?= $count['pmoney'] ?>"><?= $count['pmoney'] ?></option>
                 <option value="">Choose Money Amount</option>
                 <option value="US$0 - US$99">US$0 - US$99</option>
@@ -102,7 +103,7 @@
            <!-- Saving Money From Parents -->
         <div class="">
             <label for="" class="">Choose Your Saving Money From Parents </label>
-            <select name="cbofmoney" class="">
+            <select name="cbofmoney" class="custom-select">
                 <option value="<?= $count['fmoney'] ?>"><?= $count['fmoney'] ?></option>
                 <option value="">Choose Money Amount</option>
                 <option value="US$0 - US$99">US$0 - US$99</option>
@@ -123,7 +124,7 @@
            <!-- Scholarships Amount -->
         <div class="">
             <label for="" class="">Choose Your Scholarship Amount </label>
-            <select name="cbosmoney" class="">
+            <select name="cbosmoney" class="custom-select">
                 <option value="<?= $count['smoney'] ?>"><?= $count['smoney'] ?></option>
                 <option value="">Choose Money Amount</option>
                 <option value="US$0 - US$99">US$0 - US$99</option>
@@ -144,7 +145,7 @@
         <!-- Choose Scholarship Department or Organization -->
         <div class="">
             <label for="" class="">Choose Scholarship Department or Organization</label>
-            <select name="cboorg" class="">
+            <select name="cboorg" class="custom-select">
                 <option value="<?= $count['schscholar'] ?>"><?= $count['schscholar'] ?></option>
                 <option value="">Choose Organization</option>
                 <option value="MOE (Ministry of Education)">MOE (Ministry of Education)</option>
@@ -205,7 +206,7 @@
         <!-- Health Problem -->
         <div class="">
             <label for="" class="">Describe any Defect or Health Problem You Have</label>
-            <input type="text" name="txthpbl" value="<?= $count['health_problem'] ?>" placeholder="Enter Your Health Problem">
+            <input type="text" class="form-control" name="txthpbl" value="<?= $count['health_problem'] ?>" placeholder="Enter Your Health Problem">
         </div>
 
         <!-- Want to Apply Scholarship? -->
@@ -238,7 +239,7 @@
        
         <!-- Button -->
        <div>
-            <input class="btn btn-primary" type="submit" name="btnupdate" value="Update">
+            <input class="btn btn-info" type="submit" name="btnupdate" value="Update">
             <input class="btn btn-danger" type="reset" name="btncancel" value="Cancel" onclick="location.href='scholar_data.php' " >
         </div>
     </form>

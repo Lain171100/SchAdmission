@@ -70,7 +70,7 @@
                 <li>
                     <a href="../admin/teacher_dashboard.php">
                         <span class="ti-home"></span>
-                        <span>Teacher Home</span>
+                        <span><?php echo $stafftype ?>  Home</span>
                     </a>
                 </li>
                 <li>

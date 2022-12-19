@@ -1,38 +1,8 @@
 <?php
-
+    session_start();
     include('connect.php');
     include('autoid_functions.php'); 
     include('../admin/teacher_header.php');
-
-    if(isset($_POST['btnsave']))
-    {   
-        $txtslid=$_POST['txtslid'];
-        $cbopmoney=$_POST['cbopmoney'];
-        $cbofmoney=$_POST['cbofmoney'];
-        $cbosmoney=$_POST['cbosmoney'];
-        $cboorg=$_POST['cboorg'];
-        $rdoh=$_POST['rdoh'];
-        $txthpbl=$_POST['txthpbl'];
-        $cbowas=$_POST['cbowas'];
-
-
-    // --- Insert Program Data to Table --- //
-        $query="INSERT INTO scholar (slid, pmoney, fmoney, smoney, schscholar, health_condi, health_problem, scholar_apply)
-                VALUES ('$txtslid','$cbopmoney','$cbofmoney','$cbosmoney','$cboorg','$rdoh','$txthpbl','$cbowas')";
-        $result=mysqli_query($connection,$query);
-
-        if($result)
-        {
-            echo "<script>window.alert('Scholarship Acccount Successfully Created.')</script>";
-        }
-        else
-        {
-            echo "<p>Something went wrong in Scholarship Data Insert " . mysqli_error($connection) . "</p>";
-        }
-        
-    }
-
-    
 
 
 ?>
@@ -58,9 +28,9 @@
 		} );
 	    </script>
 
-        <div>
+        <!-- <div>
         <a href="scholar_insert.php" class="btn btn-primary"><img src="https://img.icons8.com/ios/20/000000/plus--v1.png"/> Scholar Registration Form</a>  <br><br>
-        </div>     
+        </div>      -->
 
         <div class="table-responsive">
         <table align="center" id="tableid" cellspacing="5px" cellpadding="5px" class="table table-hover">
@@ -122,8 +92,8 @@
                         if ($stafftype=="Staff")
                         {
                         echo "<td>
-                                <a href='scholar_update.php?slid=$slid' class='btn btn-secondary'>Update</a> <br>                              
-                                <a href='scholar_delete.php?slid=$slid' class='btn btn-danger'>Delete</a>
+                                <a href='scholar_update.php?slid=$slid' class='btn btn-outline-info'>Update</a> <br> <br>                             
+                                <a href='scholar_delete.php?slid=$slid' class='btn btn-outline-danger'>Delete</a>
                               </td>";
                         }
                         echo "</tr>";

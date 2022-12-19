@@ -1,6 +1,7 @@
 <?php
     
     include('connect.php');
+    include('../admin/teacher_header.php');
 
     if(isset($_REQUEST['cid']))
     {
@@ -11,14 +12,6 @@
         
         $query=mysqli_query($connection,$sql);
         $count=mysqli_fetch_array($query);
-
-      
-        // $staffroleid=$count['staffroleid'];
-        // $strsql="SELECT * FROM staffrole
-        //          WHERE staffroleid='$staffroleid' ";
-        
-        // $strquery=mysqli_query($connection,$strsql);
-        // $arr=mysqli_fetch_array($strquery);
         
 
     }
@@ -27,7 +20,6 @@
     {
         $txtcid=$_POST['txtcid'];
         $txtyear=$_POST['txtyear'];
-        // $cbosrole=substr($_POST['cbosrole'],0,9);
         $txtplace=$_POST['txtplace'];
         $cbolistening=$_POST['cbolistening'];
         $cbospeaking=$_POST['cbospeaking'];
@@ -63,14 +55,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chinese Proficiency Update</title>
-    <!-- <link rel="stylesheet" href="formstyle.css">
+    <!-- <link rel="stylesheet" href="formstyle.css"> -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
-    <link rel="stylesheet" href="css/style.css"> -->
+    <link rel="stylesheet" href="../admin/css/style.css"> 
 </head>
 <body>
-
-    <!-- staffid, staffname, staffroleid, staffemail, staffpassword, staffaddress, staffphnumber, staffimage -->
 
     <form action="chinesepro_update.php" method="POST" enctype="multiplepart/form-data">
 
@@ -78,22 +68,22 @@
     <div>
         <div>
             <label for="">Chinese Language ID</label>
-            <input type="text" name="txtcid" placeholder="" value="<?= $count['cid'] ?>" readonly>
+            <input type="text" class="form-control" name="txtcid" placeholder="" value="<?= $count['cid'] ?>" readonly>
         </div>
 
         <div>
             <label for="">1.How Long Have You Studied Chinese?</label>
-            <input type="text" name="txtyear" value="<?= $count['ctime'] ?>" placeholder="Year That You Studied Chinese" required>
+            <input type="text" class="form-control" name="txtyear" value="<?= $count['ctime'] ?>" placeholder="Year That You Studied Chinese" required>
         </div>
 
         <div>
             <label for="">2.Organization or Place Where You Studied Chinese?</label>
-            <input type="text" name="txtplace" value="<?= $count['cplace'] ?>" placeholder="Place That You Studied Chinese" required>
+            <input type="text" class="form-control" name="txtplace" value="<?= $count['cplace'] ?>" placeholder="Place That You Studied Chinese" required>
         </div>
         
         <div class="">
             <label for="" class="">Listening</label>
-            <select name="cbolistening" class=""  required>
+            <select name="cbolistening" class="custom-select"  required>
                 <option value="<?= $count['listening'] ?>"><?= $count['listening'] ?></option>
                 <option value="">Choose One Level</option>
                 <option value="Excellent">Excellent</option>
@@ -105,7 +95,7 @@
 
         <div class="">
             <label for="" class="">Speaking</label>
-            <select name="cbospeaking" class="">
+            <select name="cbospeaking" class="custom-select">
                 <option value="<?= $count['speaking'] ?>"><?= $count['speaking'] ?></option>
                 <option value="">Choose One Level</option>
                 <option value="Excellent">Excellent</option>
@@ -117,7 +107,7 @@
 
         <div class="">
             <label for="" class="">Reading</label>
-            <select name="cboreading" class="">
+            <select name="cboreading" class="custom-select">
                  <option value="<?= $count['reading'] ?>"><?= $count['reading'] ?></option>
                 <option value="">Choose One Level</option>
                 <option value="Excellent">Excellent</option>
@@ -129,7 +119,7 @@
 
         <div class="">
             <label for="" class="">Writing</label>
-            <select name="cbowriting" class="">
+            <select name="cbowriting" class="custom-select">
                  <option value="<?= $count['writing'] ?>"><?= $count['writing'] ?></option>
                 <option value="">Choose One Level</option>
                 <option value="Excellent">Excellent</option>
@@ -139,7 +129,8 @@
             </select>
         </div>
 
-        <div align="center">
+        <br>
+        <div>
             <input class="btn btn-info" type="submit" name="btnupdate" value="Update">
             <input class="btn btn-danger" type="reset" name="btncancel" value="Cancel" onclick="location.href='chinesepro_data.php' ">
         </div>

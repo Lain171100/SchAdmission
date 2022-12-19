@@ -3,36 +3,6 @@
     include('connect.php');
     include('autoid_functions.php'); 
     include('../admin/teacher_header.php');
-    
-
-    if(isset($_POST['btnsave']))
-    {   
-        $txtcid = $_POST['txtcid'];
-        $txtyear=$_POST['txtyear'];
-        $txtplace=$_POST['txtplace'];
-        $cbolistening=$_POST['cbolistening'];
-        $cbospeaking=$_POST['cbospeaking'];
-        $cboreading=$_POST['cboreading'];
-        $cbowriting=$_POST['cbowriting'];
-
-
-    // --- Insert Staff Data to Staff Table --- //
-        $query="INSERT INTO c_language (cid,ctime ,cplace ,listening ,speaking ,reading ,writing  )
-                VALUES ('$txtcid','$txtyear','$txtplace','$cbolistening','$cbospeaking','$cboreading','$cbowriting')";
-        $result=mysqli_query($connection,$query);
-
-        if($result)
-        {
-            echo "<script>window.alert('Chinese Proficiency Language Successfully Created.')</script>";
-        }
-        else
-        {
-            echo "<p>Something went wrong in Chinese Proficiency Language Insert " . mysqli_error($connection) . "</p>";
-        }
-        
-    }
-
-    
 
 
 ?>
@@ -58,9 +28,9 @@
 		} );
 	    </script>
 
-        <div>
+        <!-- <div>
         <a href="chinesepro.php" class="btn btn-primary"><img src="https://img.icons8.com/ios/20/000000/plus--v1.png"/> Chinese Proficiency Form</a>  <br><br>
-        </div>     
+        </div>      -->
 
         <div class="table-responsive">
         <table align="center" id="tableid" cellspacing="5px" cellpadding="5px" class="table table-hover">
@@ -120,8 +90,8 @@
                         if ($stafftype=="Staff")
                         {
                         echo "<td>
-                                <a href='chinesepro_update.php?cid=$cid' class='btn btn-secondary'>Update</a> <br>                              
-                                <a href='chinesepro_delete.php?cid=$cid' class='btn btn-danger'>Delete</a>
+                                <a href='chinesepro_update.php?cid=$cid' class='btn btn-outline-info'>Update</a> <br><br>                            
+                                <a href='chinesepro_delete.php?cid=$cid' class='btn btn-outline-danger'>Delete</a>
                               </td>";
                         }
                         echo "</tr>";

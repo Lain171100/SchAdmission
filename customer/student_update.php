@@ -172,10 +172,26 @@
             <label for=""><b>Choose Marital Status:</b></label>
         </div>
         <div>
+            <?php if($count['marital']=="Married")
+            {
+            ?>
+            <label for="">Married:</label>
+            <input type="radio" name="status" value="Married" checked>
+            <label for="">Single:</label>
+            <input type="radio" name="status" value="Single">
+            <?php
+            }
+            ?>
+
+            <?php if($count['marital']=="Single")
+            {?>
             <label for="">Married:</label>
             <input type="radio" name="status" value="Married">
             <label for="">Single:</label>
-            <input type="radio" name="status" value="Single">
+            <input type="radio" name="status" value="Single" checked>
+            <?php
+            }
+            ?>
         </div>
 
         <!-- D.O.B -->
@@ -254,16 +270,34 @@
         
         <!-- Citizenship -->
         <div>
+            <!-- Yes -->
+            <?php if($count['roc']=="Yes")
+            {?>
+            <label for="">Used to be a citizen of R.O.C or not?:</label>
+            <label for="">Yes</label>
+            <input type="radio" name="rdo" value="Yes" checked>
+            <label for="">No</label>
+            <input type="radio" name="rdo" value="No">
+            <?php
+            }
+            ?>
+
+            <!-- No -->
+            <?php if($count['roc']=="No")
+            {?>
             <label for="">Used to be a citizen of R.O.C or not?:</label>
             <label for="">Yes</label>
             <input type="radio" name="rdo" value="Yes">
             <label for="">No</label>
-            <input type="radio" name="rdo" value="No">
+            <input type="radio" name="rdo" value="No" checked>
+            <?php
+            }
+            ?>
         </div>
                 
         <!-- Button -->
         <div>
-            <input class="btn btn-primary" type="submit" name="btnupdate" value="Update">
+            <input class="btn btn-info" type="submit" name="btnupdate" value="Update">
             <input class="btn btn-danger" type="reset" name="btncancel" value="Cancel" onclick="location.href='student_data.php' ">
         </div>
     </form>

@@ -8,12 +8,13 @@
     {
         $staffid = $_SESSION['staffid'];
 
-        $sql="SELECT * from staff
-                WHERE staffid='$staffid'";
+        $sql="SELECT * FROM staff s, stafftype st
+              WHERE s.stafftypeid=st.stafftypeid
+              AND s.staffid='$staffid' ";
 
         $staffquery=mysqli_query($connection,$sql);
-        $staffcount=mysqli_num_rows($staffquery);
         $staffarray=mysqli_fetch_array($staffquery);
+        $stafftype=$staffarray['stafftype'];
 
     }
     
@@ -50,40 +51,47 @@
                 <li>
                     <a href="../admin/staff_dashboard.php">
                         <span class="ti-home"></span>
-                        <span>Staff Home</span>
+                        <span><?php echo $stafftype ?>  Home</span>
                     </a>
                 </li>
                 <li>
                     <a href="../customer/student_data.php">
-                        <span class="ti-agenda"></span>
+                        <span class="ti-user"></span>
                         <span>Student's Data</span>
                     </a>
                 </li>
                 <li>
                     <a href="../customer/eduback_data.php">
-                        <span class="ti-face-smile"></span>
+                        <span class="ti-write"></span>
                         <span>Student's Education Background</span>
                     </a>
                 </li>
 
                 <li>
                     <a href="../customer/chinesepro_data.php">
-                        <span class="ti-face-smile"></span>
+                        <span class="ti-ruler-pencil"></span>
                         <span>Student's Chinese Proficiency Data</span>
                     </a>
                 </li>
 
                 <li>
                     <a href="../customer/program_data.php">
-                        <span class="ti-face-smile"></span>
+                        <span class="ti-blackboard"></span>
                         <span>Student's Program Selection</span>
                     </a>
                 </li>
 
                 <li>
                     <a href="../customer/scholar_data.php">
-                        <span class="ti-face-smile"></span>
+                        <span class="ti-medall"></span>
                         <span>Student's Scholarship and Financial</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="../customer/docsubmit_data.php">
+                        <span class="ti-book"></span>
+                        <span>Student's Documentation</span>
                     </a>
                 </li>
             </ul>
@@ -116,18 +124,18 @@
         
         <main>
             
-            <h2 class="dash-title">Overview</h2>
+             <h2 class="dash-title">Overview</h2>
             
             <div class="dash-cards">
                 <div class="card-single">
                     <div class="card-body">
-                        <span class="ti-agenda"></span>
+                        <span class="ti-user"></span>
                         <div>
-                            <h5>Total Amount of Staffs</h5>
+                            <h5>Total Amount of Students</h5>
                             <h4>
                                 <?php
-                                    $sql="SELECT staffid FROM staff 
-                                            ORDER BY staffid ";
+                                    $sql="SELECT stuid FROM student 
+                                            ORDER BY stuid ";
                                     $query=mysqli_query($connection,$sql);
 
                                     $row=mysqli_num_rows($query);
@@ -138,19 +146,19 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <a href="staff_table.php">View all</a>
+                        <a href="../customer/student_data.php">View all</a>
                     </div>
                 </div>
                 
                 <div class="card-single">
                     <div class="card-body">
-                        <span class="ti-face-smile"></span>
+                        <span class="ti-write"></span>
                         <div>
-                            <h5>Total of Staff Types</h5>
+                            <h5>Total of Student's Education Background</h5>
                             <h4>
                                 <?php
-                                    $sql="SELECT stafftypeid FROM stafftype
-                                          ORDER BY stafftypeid ";
+                                    $sql="SELECT eid FROM eduback
+                                          ORDER BY eid ";
                                     $query=mysqli_query($connection,$sql);
 
                                     $row=mysqli_num_rows($query);
@@ -161,15 +169,15 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <a href="stafftype_table.php">View all</a>
+                        <a href="../customer/eduback_data.php">View all</a>
                     </div>
                 </div>
                 
                 <div class="card-single">
                     <div class="card-body">
-                        <span class="ti-check-box"></span>
+                        <span class="ti-ruler-pencil"></span>
                         <div>
-                            <h5>Total Staff & Staff Roles</h5>
+                            <h5>Total of Student's Chinese Proficiency Data</h5>
                             <h4>
                                 <?php
                                     $sql="SELECT staffid FROM staff 
@@ -178,13 +186,13 @@
 
                                     $row=mysqli_num_rows($query);
 
-                                    $sql="SELECT stafftypeid FROM stafftype
-                                          ORDER BY stafftypeid ";
+                                    $sql="SELECT cid FROM c_language
+                                          ORDER BY cid ";
                                     $query=mysqli_query($connection,$sql);
 
                                     $rows=mysqli_num_rows($query);
 
-                                    echo '<h2> Total = '.$row+$rows.'</h2>';
+                                    echo '<h2> Total = '.$rows.'</h2>';
 
                                     
                                 ?>
@@ -192,7 +200,80 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <a href="searchstaff.php">View all</a>
+                        <a href="../customer/chinesepro_data.php">View all</a>
+                    </div>
+                </div>
+            </div>
+           <h2 class="dash-title"></h2>
+            
+            <div class="dash-cards">
+                <div class="card-single">
+                    <div class="card-body">
+                        <span class="ti-blackboard"></span>
+                        <div>
+                            <h5>Total of Student's Choosing Program</h5>
+                            <h4>
+                                <?php
+                                    $sql="SELECT pid FROM program 
+                                        ORDER BY pid ";
+                                    $query=mysqli_query($connection,$sql);
+
+                                    $row=mysqli_num_rows($query);
+
+                                    echo '<h2> Total = '.$row.'</h2>';
+                                ?>
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="../customer/program_data.php">View all</a>
+                    </div>
+                </div>
+                
+                
+                <div class="card-single">
+                    <div class="card-body">
+                        <span class="ti-medall"></span>
+                        <div>
+                            <h5>Total of Student's Applying Scholar & Financial Statement</h5>
+                            <h4>
+                                <?php
+                                    $sql="SELECT slid FROM scholar 
+                                        ORDER BY slid ";
+                                    $query=mysqli_query($connection,$sql);
+
+                                    $row=mysqli_num_rows($query);
+
+                                    echo '<h2> Total = '.$row.'</h2>';
+                                ?>
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="../customer/scholar_data.php">View all</a>
+                    </div>
+                </div>
+                
+                <div class="card-single">
+                    <div class="card-body">
+                        <span class="ti-book"></span>
+                        <div>
+                            <h5>Total of Student's Documentation Upload</h5>
+                            <h4>
+                                <?php
+                                    $sql="SELECT did FROM doc_submit 
+                                        ORDER BY did ";
+                                    $query=mysqli_query($connection,$sql);
+
+                                    $row=mysqli_num_rows($query);
+
+                                    echo '<h2> Total = '.$row.'</h2>';
+                                ?>
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="../customer/docsubmit_data.php">View all</a>
                     </div>
                 </div>
             </div>
@@ -207,7 +288,7 @@
         
     </div>
     
-    <div align="center">Copyright @ reserved </div>
+    <div align="center">@ National ChiNan University</div>
 
 </body>
 </html>

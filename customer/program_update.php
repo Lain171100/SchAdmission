@@ -1,6 +1,7 @@
 <?php
     
     include('connect.php');
+    include('../admin/teacher_header.php');
 
     if(isset($_REQUEST['pid']))
     {
@@ -51,10 +52,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Program and Department Data Update</title>
-    <!-- <link rel="stylesheet" href="formstyle.css">
+    <!-- <link rel="stylesheet" href="formstyle.css"> -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
-    <link rel="stylesheet" href="css/style.css"> -->
+    <link rel="stylesheet" href="../admin/css/style.css"> 
 </head>
 <body>
 
@@ -71,8 +72,8 @@
         </div> 
             <!-- Choose Season -->
         <div class="">
-            <label for="" class="">Choose Season:</label>
-            <select name="cboseason" class="">
+            <label for="" >Choose Season:</label>
+            <select name="cboseason" class="custom-select">
                  <option value="<?= $count['season'] ?>"><?= $count['season'] ?></option>
                 <option value="">Choose One Season</option>
                 <option value="Spring">Spring</option>
@@ -83,7 +84,7 @@
         <!-- Choose Education Level -->
         <div class="">
             <label for="" class="">Choose Education Level That You Want To Apply:</label>
-            <select name="cbolevel" class="">
+            <select name="cbolevel" class="custom-select">
                 <option value="<?= $count['edulevel'] ?>"><?= $count['edulevel'] ?></option>
                 <option value="">Choose One Level</option>
                 <option value="Bachelor">Bachelor</option>
@@ -95,7 +96,7 @@
         <!-- First Choice -->
         <div class="">
             <label for="" class="">First Choice Department/Institute</label>
-            <select name="cbofirst" class="">
+            <select name="cbofirst" class="custom-select">
                 <option value="<?= $count['fcdep'] ?>"><?= $count['fcdep'] ?></option>
                 <option value="">Choose One Department</option>
                 <option value="Computer Science and Information Engineering">Computer Science and Information Engineering</option>
@@ -112,7 +113,7 @@
         <!-- Second Choice Department/Institute -->
         <div class="">
             <label for="" class="">Second Choice Department/Institute</label>
-            <select name="cbosecond" class="">
+            <select name="cbosecond" class="custom-select">
                 <option value="<?= $count['scdep'] ?>"><?= $count['scdep'] ?></option>
                 <option value="">Choose One Department</option>
                 <option value="Computer Science and Information Engineering">Computer Science and Information Engineering</option>
@@ -128,7 +129,7 @@
         <!-- Third Choice Department/Institute -->
         <div class="">
             <label for="" class="">Third Choice Department/Institute</label>
-            <select name="cbothird" class="">
+            <select name="cbothird" class="custom-select">
                 <option value="<?= $count['tcdep'] ?>"><?= $count['tcdep'] ?></option>
                 <option value="">Choose One Department</option>
                 <option value="Computer Science and Information Engineering">Computer Science and Information Engineering</option>
@@ -142,8 +143,9 @@
             </select>
         </div>
         <!-- Button -->
+        <br>
        <div>
-            <input class="btn btn-primary" type="submit" name="btnupdate" value="Save">
+            <input class="btn btn-info" type="submit" name="btnupdate" value="Update">
             <input class="btn btn-danger" type="reset" name="btncancel" value="Cancel" onclick="location.href='program_data.php' " >
         </div>
     </form>

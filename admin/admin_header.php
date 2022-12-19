@@ -83,12 +83,12 @@
                         <span>Staff</span>
                     </a>
                 </li>
-                <li>
+                <!-- <li>
                     <a href="searchstaff.php">
                         <span class="ti-search"></span>
                         <span>Search</span>
                     </a>
-                </li>
+                </li> -->
             </ul>
         </div>
     </div>

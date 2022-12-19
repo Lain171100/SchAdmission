@@ -117,6 +117,7 @@
                 </div>
 
                 <button class="btn btn-primary btn-lg btn-block" type="submit" name="btnlogin">Login</button>
+                <button class="btn btn-danger btn-lg btn-block" type="rest" name="btncancel" onclick="location.href='../customer/home_page.php' ">Cancel</button>
 
             </div>
             </div>

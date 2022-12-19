@@ -4,44 +4,26 @@
     include('autoid_functions.php'); 
     include('../admin/teacher_header.php');
 
-    
-
-if(isset($_FILES['file'])){
-  $errors= array();
-  $file_name = $_FILES['file']['name'];
-  $file_size =$_FILES['file']['size'];
-  $file_tmp =$_FILES['file']['tmp_name'];
-  $file_type=$_FILES['file']['type'];
-  if($file_size > 2097152){
-     $errors[]='File size must be excately 2 MB';
-  }
-
-  if(empty($errors)==true){
-     move_uploaded_file($file_tmp,"uploads\\".$file_name);
-     echo "Success";
-  }else{
-     print_r($errors);
-  }
- 
-  
-
-    // --- Insert Program Data to Table --- //
-        $query="INSERT INTO doc_submit (did, appform, pass, dip, transcript, recom, autobio, studyp, financial, doc1, doc2)
-                VALUES ('$txtdid','$file_name','$file_pass_name','$file_dip_name','$file_tran_name','$file_recom_name','$file_ab_name','$file_sp_name','$file_fin_name','$file_done_name','$file_dtwo_name')";
-      $result=mysqli_query($connection,$query);
-
-        if($result)
-        {
-            echo "<script>window.alert('Doc Submit Data Successfully Created.')</script>";
-
-        }
-        else
-        {
-            echo "<p>Something went wrong in Doc Upload " . mysqli_error($connection) . "</p>";
-        }
-        
-    }
-
+     if(isset($_FILES['image'])){
+      $errors= array();
+      $file_name = $_FILES['image']['name'];
+      $file_size =$_FILES['image']['size'];
+      $file_tmp =$_FILES['image']['tmp_name'];
+      $file_type=$_FILES['image']['type'];
+      
+      }
+      
+      if($file_size > 2097152){
+         $errors[]='File size must be excately 2 MB';
+      }
+      
+      if(empty($errors)==true){
+         move_uploaded_file($file_tmp,"images/".$file_name);
+         echo "Success";
+      }else{
+         print_r($errors);
+      }
+   
     
 
 
@@ -66,11 +48,7 @@ if(isset($_FILES['file'])){
 		{
 		    $('#tableid').DataTable();
 		} );
-	    </script>
-
-        <div>
-        <a href="docsubmit_insert.php" class="btn btn-primary"><img src="https://img.icons8.com/ios/20/000000/plus--v1.png"/> Documentaion Submission Form</a>  <br><br>
-        </div>     
+	    </script>   
 
         <div class="table-responsive">
         <table align="center" id="tableid" cellspacing="5px" cellpadding="5px" class="table table-hover">
@@ -135,10 +113,9 @@ if(isset($_FILES['file'])){
                         echo "<td>$doc1</td>";
                         echo "<td>$doc2</td>";
 
-                        
                         echo "<td>
-                                <a href='docsubmit_update.php?did=$did' class='btn btn-secondary'>Update</a> <br>                              
-                                <a href='docsubmit_delete.php?did=$did' class='btn btn-danger'>Delete</a>
+                                <a href='docsubmit_insert.php?did=$did' class='btn btn-outline-info'>Insert New Data</a> <br><br>                                
+                                <a href='docsubmit_delete.php?did=$did' class='btn btn-outline-danger'>Delete</a>
                               </td>";
                         
                         echo "</tr>";

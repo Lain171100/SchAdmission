@@ -1,11 +1,13 @@
 <?php
-
+   session_start();
    include('connect.php');
    include('autoid_functions.php'); 
+   include('header_form.php');
 
     if(isset($_POST['btnsave']))
     {   
       $txtdid=$_POST['txtdid'];
+      $studentid=$_POST['txtstudentid'];
       
       //----------   Application Form    ------------//
       if(isset($_FILES['fileToUpload'])){
@@ -186,12 +188,12 @@
       }
 
       //----------   Transcript    ------------//
-      if(empty($errors_dip)==true) {
+      if(empty($errors_tran)==true) {
          
          move_uploaded_file($file_tran_tmp,"pdf_file/".$file_tran_name);
 
       }else{
-         print_r($errors_dip);
+         print_r($errors_tran);
       }
       
       //----------   Recommendation Letter    ------------//
@@ -249,14 +251,43 @@
       }
       
 
+    //   ================
+    if(isset($_FILES['image'])){
+      $errors= array();
+      $file_name = $_FILES['image']['name'];
+      $file_size =$_FILES['image']['size'];
+      $file_tmp =$_FILES['image']['tmp_name'];
+      $file_type=$_FILES['image']['type'];
+      
+      }
+      
+    //   if($file_size > 2097152){
+    //      $errors[]='File size must be excately 2 MB';
+    //   }
+      
+      if(empty($errors)==true){
+         move_uploaded_file($file_tmp,"pdf_file/".$file_name);
+        //  echo "Success";
+      }else{
+         print_r($errors);
+      }
+    //   ===========
+
 
       $query="INSERT INTO doc_submit (did, appform, pass, dip, transcript, recom, autobio, studyp, financial, doc1, doc2)
                 VALUES ('$txtdid','$file_name','$file_pass_name','$file_dip_name','$file_tran_name','$file_recom_name','$file_ab_name','$file_sp_name','$file_fin_name','$file_done_name','$file_dtwo_name')";
       $result=mysqli_query($connection,$query);
 
         if($result)
-        {
-            echo "<script>window.alert('Doc Submit Data Successfully Created.')</script>";
+        {   
+            $updatesql="UPDATE stu SET did='$txtdid' WHERE sid='$studentid' ";
+            $updatedata=mysqli_query($connection,$updatesql);
+            if ($updatedata)
+            {
+                echo "<script>window.alert('Documentation Data Successfully Created.')</script>
+                <script>window.location='lastpage.php'</script>";
+            }
+            // echo "<script>window.alert('Doc Submit Data Successfully Created.')</script>";
 
         }
         else
@@ -289,6 +320,7 @@
 // Condition End
 }
 
+
 ?>
 
 
@@ -302,79 +334,110 @@
     <title>Document</title>
 </head>
 <body>
+
+ <!-- Process -->
+    <div class="best-features">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="section-heading">
+              <h2>Process Status</h2>
+            </div>
+          </div>
+          <div class="col-md-12">
+              <img src="assets/images/process_six.jpg" alt="" class="img-fluid" height="200px">
+          </div>
+        </div>
+      </div>
+    </div>
+   
+
+   <!-- Process End -->
+
+   <div class="container">
+   <div class="col-md-12">
     <form action="docsubmit_insert.php" method="POST" enctype="multipart/form-data">
         <legend>Document Submission Form</legend>
 
         <div>
             <label for="did">Doc Submit ID:</label>
             <input type="text" class="form-control" name="txtdid" value="<?= AutoID('doc_submit','did','DID-',4) ?>" readonly>
+            <br>
          </div>
 
         <!-- Application Form -->
         <div>
-           <label for="">Application Form</label>
-           <input type="file" class="" name="fileToUpload" required>
+           <label for="">Application Form:</label>
+           <input type="file" class="" name="fileToUpload"  required>
+
         </div>
-      
+      <br>
         <!-- Passport -->
          <div>
-            <label for="">Passport </label>
+            <label for="">Passport: </label>
             <input type="file" class="" name="PassFile" required>
          </div>
-
+      <br>
          <!-- Highest Level Diploma -->
          <div>
-            <label for="">Highest Level Diploma </label>
+            <label for="">Highest Level Diploma: </label>
             <input type="file" class="" name="DipFile" required>
          </div>
-
+      <br>
          <!-- Highest Level Diploma Transcript -->
          <div>
-            <label for="">Highest Level Diploma Transcript </label>
+            <label for="">Highest Level Diploma Transcript: </label>
             <input type="file" class="" name="TranFile" required>
          </div>
-
+      <br>
          <!-- Recommendation Letter -->
          <div>
-            <label for="">Recommendation Letter </label>
+            <label for="">Recommendation Letter: </label>
             <input type="file" class="" name="RecomFile" required>
          </div>
-
+      <br>
          <!-- Autobiography -->
          <div>
-            <label for="">Autobiography </label>
+            <label for="">Autobiography: </label>
             <input type="file" class="" name="AbFile" required>
          </div>
-
+      <br>
          <!-- Study Plan -->
          <div>
-            <label for="">Study Plan </label>
+            <label for="">Study Plan: </label>
             <input type="file" class="" name="SpFile" required>
          </div>
-
+      <br>
          <!-- Financial Statement -->
          <div>
-            <label for="">Financial Statement </label>
+            <label for="">Financial Statement: </label>
             <input type="file" class="" name="FsFile" required>
          </div>
-
+      <br>
          <!-- Documents Required By Department 1 -->
          <div>
-            <label for="">Documents Required by Department 1 </label>
+            <label for="">Documents Required by Department 1: </label>
             <input type="file" class="" name="DoneFile" required>
          </div>
-
+      <br>
          <!-- Documents Required By Department 2 -->
          <div>
-            <label for="">Documents Required by Department 2 </label>
+            <label for="">Documents Required by Department 2: </label>
             <input type="file" class="" name="DtwoFile" required>
          </div>
-
+      <br>
          <div>
+            <input type="text" name="txtstudentid" value="<?php echo $_SESSION['sid']; ?>" hidden>
             <input class="btn btn-primary" type="submit" name="btnsave" value="Save">
-            <input class="btn btn-danger" type="reset" name="btncancel" value="Cancel" onclick="location.href='docsubmit_data.php' ">
+            <input class="btn btn-danger" type="reset" name="btncancel" value="Clear" >
          </div>
 
     </form>
+   </div>
+   </div>
 </body>
 </html>
+
+<?php
+   include('footer.php');
+?>

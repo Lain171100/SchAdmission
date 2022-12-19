@@ -1,36 +1,9 @@
 <?php
-
+    session_start();
     include('connect.php');
     include('autoid_functions.php'); 
     include('../admin/teacher_header.php');
-
-    if(isset($_POST['btnsave']))
-    {   
-        $txtpid=$_POST['txtpid'];
-        $cboseason=$_POST['cboseason'];
-        $cbolevel=$_POST['cbolevel'];
-        $cbofirst=$_POST['cbofirst'];
-        $cbosecond=$_POST['cbosecond'];
-        $cbothird=$_POST['cbothird'];
-
-
-    // --- Insert Program Data to Table --- //
-        $query="INSERT INTO program (pid, season, edulevel, fcdep, scdep, tcdep)
-                VALUES ('$txtpid','$cboseason','$cbolevel','$cbofirst','$cbosecond','$cbothird')";
-        $result=mysqli_query($connection,$query);
-
-        if($result)
-        {
-            echo "<script>window.alert('Program Acccount Successfully Created.')</script>";
-        }
-        else
-        {
-            echo "<p>Something went wrong in Program Data Insert " . mysqli_error($connection) . "</p>";
-        }
-        
-    }
-
-    
+ 
 
 
 ?>
@@ -56,9 +29,9 @@
 		} );
 	    </script>
 
-        <div>
+        <!-- <div>
         <a href="program_insert.php" class="btn btn-primary"><img src="https://img.icons8.com/ios/20/000000/plus--v1.png"/> Program Registration Form</a>  <br><br>
-        </div>     
+        </div>      -->
 
         <div class="table-responsive">
         <table align="center" id="tableid" cellspacing="5px" cellpadding="5px" class="table table-hover">
@@ -114,8 +87,8 @@
                         if ($stafftype=="Staff")
                         {
                         echo "<td>
-                                <a href='program_update.php?pid=$pid' class='btn btn-secondary'>Update</a> <br>                              
-                                <a href='program_delete.php?pid=$pid' class='btn btn-danger'>Delete</a>
+                                <a href='program_update.php?pid=$pid' class='btn btn-outline-info'>Update</a> <br> <br>                              
+                                <a href='program_delete.php?pid=$pid' class='btn btn-outline-danger'>Delete</a>
                               </td>";
                         }
                         echo "</tr>";
