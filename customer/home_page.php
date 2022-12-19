@@ -16,14 +16,25 @@
     <title>NCNU Website</title>
 
     <style>
-      img{
+      /* Department Image Size */
+      .product-item img{
         width:100px;
         height:200px;
         object-fit:cover;
       }
 
+      /* Department Textbox */
       .msg{
         height:200px;
+      }
+
+      /* foreign alumni */
+      .thumb-container img{
+        height:250px;
+      }
+
+      .hover-content p{
+        color:white;
       }
     </style>
 
@@ -126,13 +137,16 @@
     </div>
     <!-- Banner Ends Here -->
 
+
+    <!-- Departments Start Here -->
+
     <div class="latest-products">
       <div class="container">
         <div class="row">
           <div class="col-md-12">
             <div class="section-heading">
               <h2>List of Departments</h2>
-              <a href="products.html">View All Departments<i class="fa fa-angle-right"></i></a>
+              <a href="departments.php">View All Departments &nbsp;  <i class="fa fa-angle-right"></i></a>
             </div>
           </div>
           <div class="col-md-4 ">
@@ -141,7 +155,9 @@
               <div class="down-content msg">
                 <a href="https://www.csie.ncnu.edu.tw/home"><h4>Department of Computer Science & Information Engineering</h4></a>
                 
-                <p>資訊工程系成立於1996年，是台灣國立暨南國際大學最早成立的系之一。我們珍視資工CS這個大家庭（學生，助理和教授）</p>
+                <p>We value every member of the CS family (students and professors) </p>
+                
+                <span> <a href="https://www.csie.ncnu.edu.tw/home">See More</a> </span>
               </div>
             </div>
           </div>
@@ -149,8 +165,9 @@
             <div class="product-item">
               <a href="https://www.econ.ncnu.edu.tw/"><img src="assets/images/econ.jpg" alt="" ></a>
               <div class="down-content msg">
-                <a href="https://www.econ.ncnu.edu.tw//"><h4>Department of Econic</h4></a>
-                <p>經濟學系 (所) 隸屬於管理學院，是國立暨南國際大學最初五個創校研究所之一。</p>
+                <a href="https://www.econ.ncnu.edu.tw/"><h4>Department of Econic</h4></a>
+                <p>The Department of Economics (Institute) is affiliated to the School of Management </p>
+                <span> <a href="https://www.econ.ncnu.edu.tw/">See More</a> </span>
               </div>
             </div>
           </div>
@@ -159,7 +176,8 @@
               <a href="https://ch.ncnu.edu.tw/"><img src="assets/images/foreign.jpg" alt=""></a>
               <div class="down-content msg">
                 <a href="https://ch.ncnu.edu.tw/"><h4>Department of Chinese as a Second Language</h4></a>
-                <p>大學部非在華語地區畢業者，須檢附新版華語能力測驗（TOCFL）聽讀流利級，或其他足以說明其中文能力之證明，如修習課程證明等。</p>
+                <p>Those who graduated from a non-Chinese-speaking area must attach the new version of (TOCFL) </p>
+                <span> <a href="https://ch.ncnu.edu.tw/">See More</a> </span>
                 
               </div>
             </div>
@@ -169,7 +187,8 @@
               <a href="https://www.epa.ncnu.edu.tw/pg.asp?theme=87"><img src="assets/images/edu.jpg" alt=""></a>
               <div class="down-content msg">
                 <a href="https://www.epa.ncnu.edu.tw/pg.asp?theme=87"><h4>Department of Educational Policy and Administration</h4></a>
-                <p>  教育學院於 2010 年 2 月 1 日正式成立，共設置3系1所，包括：國際文教與比較教育學系、教育政策與行政學系、諮商心理與人力資源發展學系、課程教學與科技研究所等四個系所。</p>
+                <p>  The School of Education was formally established on February 1, 2010, with 3 departments and 1 school</p>
+                <span> <a href="https://www.epa.ncnu.edu.tw/pg.asp?theme=87">See More</a> </span>
               </div>
             </div>
           </div>
@@ -178,7 +197,8 @@
               <a href="https://gec.ncnu.edu.tw/"><img src="assets/images/generaledu.jpg" alt=""></a>
               <div class="down-content msg">
                 <a href="https://gec.ncnu.edu.tw/"><h4>Department of General Education Center</h4></a>
-                <p>暨大通識教育在理念目標扣合學校發展與定位，並配合學校特色發展推動在地實踐、綠色環保、東南亞文化三大特色通識教學</p>
+                <p>In order to cooperate with the characteristic development of Jinan University,</p>
+                <span> <a href="https://gec.ncnu.edu.tw/">See More</a> </span>
               </div>
             </div>
           </div>
@@ -187,7 +207,8 @@
               <a href="https://www.cseas.ncnu.edu.tw/"><img src="assets/images/research.jpg" alt=""></a>
               <div class="down-content msg">
                 <a href="https://www.cseas.ncnu.edu.tw/"><h4>Department of Southeast Asian Studies</h4></a>
-                <p>我們著重於當代東南亞政治、經濟、社會文化及族群關係之研究，和政府政策及社會需求，提供研究發現與成果予政府</p>
+                <p>We focus on the research of contemporary Southeast Asian politics, economy, </p>
+                <span> <a href="https://www.cseas.ncnu.edu.tw/">See More</a> </span>
               </div>
             </div>
           </div>
@@ -195,8 +216,9 @@
       </div>
     </div>
     
+    
     <!-- About Us -->
-    <div class="best-features">
+     <div class="best-features">
       <div class="container">
         <div class="row">
           <div class="col-md-12">
@@ -209,13 +231,138 @@
               <h4>Words from the President</h4>
               <p>I hope to establish a university that focuses on modernity and well-being. Whether teaching, research, or governance, I would ensure that the university can keep up with global trends and align with international standards. In addition, faculties and students can access abundant resources to explore novel ideas, innovate across regions, and connect with industries. The aim is to improve the well-being of human beings through the provision of cross-disciplinary knowledge, and through actions that enhance education and deeply cultivate assets that will transform the future society. I look forward to welcoming you to the university.</p>
               <p>Dr. Dong-Sing Wuu,the 8th President of National Chi Nan University</p>
-              <a href="aaaaboutus.php" class="filled-button">Read More</a>
+              <a href="aboutus.php" class="filled-button">Read More</a>
             </div>
           </div>
           <div class="col-md-6">
             <div class="right-image">
-              <img src="assets/images/about.jpg" alt="" height="200px">
+              <img src="assets/images/about.jpg" alt="" height="400px">
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+     <!-- Team Member -->
+    <div class="team-members">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="section-heading">
+              <h2>Foreign Alumni</h2>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="team-member">
+              <div class="thumb-container">
+                <img src="assets/images/user3.jpg" alt="">
+                <div class="hover-effect">
+                  <div class="hover-content">
+                    <p>NCNU's Chinese language and literature course helped me improve my Chinese language skills tremendously, allowing me to fully integrate into the Chinese-only learning environment. Besides the beautiful scenery, NCNU also has beautiful and friendly people. The teachers and classmates are very kind to international students.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="down-content">
+                <h4>Hyakuai Nahao</h4>
+                <span>Japan</span>
+                <p>2017-2020</p>
+                <ul class="stars">
+                  <li>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="team-member">
+              <div class="thumb-container">
+                <img src="assets/images/user2.jpg" alt="">
+                <div class="hover-effect">
+                  <div class="hover-content">
+                    <p>NCNU offers a panoramic view of nature, which I enjoy very much. NCNU has made it possible for me to pursue my PhD here, by offering me a good scholarship and alleviating my financial worries.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="down-content">
+                <h4>Lokesh Bettada</h4>
+                <span>India</span>
+                <p>2022-Current</p>
+                <ul class="stars">
+                  <li>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="team-member">
+              <div class="thumb-container">
+                <img src="assets/images/user1.jpg" alt="" width="50px">
+                <div class="hover-effect">
+                  <div class="hover-content">
+                    <p>The topic of my thesis is the determinant of China’s direct investment in Russia – an empirical test. I came to NCNU to study because of the recommendation of a senior NCNU student from my hometown. My schoolmates took great care of me and helped me adapt to everything here quickly.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="down-content">
+                <h4>Shmeleva Tatiana Olegovna</h4>
+                <span>Russia</span>
+                <p>2019-2020</p>
+                <ul class="stars">
+                  <li>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          
+          
+
+
+        </div>
+      </div>
+    </div>
+
+    
+    <!-- Videos -->
+    <div class="happy-clients">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="section-heading">
+              <h2>Videos About University</h2>
+            </div>
+          </div>
+          <!-- Videos -->
+          <div class="col-md-12">
+          <div class="row">
+          <div class="col-md-4">
+            <iframe width="350" height="300" src="https://www.youtube.com/embed/ex-2SjBY_Ic" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+
+          <div class="col-md-4">
+            <iframe width="350" height="300" src="https://www.youtube.com/embed/l7chsv_egRg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+
+          <div class="col-md-4">
+            <iframe width="350" height="300" src="https://www.youtube.com/embed/iVlfvB0PYl4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          </div>
           </div>
         </div>
       </div>
@@ -227,10 +374,16 @@
         <div class="row">
           <div class="col-md-12">
             <div class="inner-content">
-              <p>National ChiNan University</p>
               <!-- Google Translate -->
               <div id="google_translate_element"></div>
+              <br>
               <!--  -->
+              <p>Address: 4th Floor, Administration Building, No. 1 University Road, Puli Town, Nantou County, 545</p> 
+              <p>Tel: 886-49-2910960 ext. 2230~2233</p>
+              <p>Hotline: 886-49-2918305</p>
+              <p>Fax: 886-49-2913784</p>
+              <p>EMAIL: admission@ncnu.edu.tw</p>
+              
             </div>
           </div>
         </div>

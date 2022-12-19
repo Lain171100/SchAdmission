@@ -134,12 +134,14 @@
           <div class="col-md-4">
             <div class="left-content">
               <h4>About our office</h4>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisic elit. Sed voluptate nihil eumester consectetur similiqu consectetur.<br><br>Lorem ipsum dolor sit amet, consectetur adipisic elit. Et, consequuntur, modi mollitia corporis ipsa voluptate corrupti.</p>
+              <p>Address: 4th Floor, Administration Building, No. 1 University Road, Puli Town, Nantou County, 545
+              <br>Tel: 886-49-2910960 ext. 2230~2233
+              <br>Hotline: 886-49-2918305
+              <br>Fax: 886-49-2913784
+              <br>EMAIL: admission@ncnu.edu.tw</p>
               <ul class="social-icons">
-                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                <li><a href="#"><i class="fa fa-behance"></i></a></li>
+                <li><a href="https://www.facebook.com/ncnu.tw"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="https://www.youtube.com/@NCNUTW/"><i class="fa fa-youtube"></i></a></li> 
               </ul>
             </div>
           </div>
@@ -156,7 +158,7 @@
               <h2>Send us a Message</h2>
             </div>
           </div>
-          <div class="col-md-8">
+          <div class="col-md-10">
             <div class="contact-form">
               <form id="contact" action="" method="post">
                 <div class="row">
@@ -189,12 +191,13 @@
               </form>
             </div>
           </div>
-          <div class="col-md-4">
+          <!-- <div class="col-md-4">
             <ul class="accordion">
               <li>
-                  <a>Accordion Title One</a>
+                  <a>Frequently Asked Questions (FAQ)</a>
                   <div class="content">
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisic elit. Sed voluptate nihil eumester consectetur similiqu consectetur.<br><br>Lorem ipsum dolor sit amet, consectetur adipisic elit. Et, consequuntur, modi mollitia corporis ipsa voluptate corrupti elite.</p>
+                      <p>When is the Application Period?</p>
+                      <p>For More Detail, Please refer to this link <a href="https://rpage.ncnu.edu.tw/p/404-1000-6780.php?Lang=en">See Detail</a></p>
                   </div>
               </li>
               <li>
@@ -218,61 +221,30 @@
             </ul>
           </div>
         </div>
-      </div>
-    </div>
+      </div>-->
+    </div> 
 
-    <div class="happy-clients">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="section-heading">
-              <h2>Our Happy Customers</h2>
-            </div>
-          </div>
-          <div class="col-md-12">
-            <div class="owl-clients owl-carousel">
-              <div class="client-item">
-                <img src="assets/images/client-01.png" alt="1">
-              </div>
-              
-              <div class="client-item">
-                <img src="assets/images/client-01.png" alt="2">
-              </div>
-              
-              <div class="client-item">
-                <img src="assets/images/client-01.png" alt="3">
-              </div>
-              
-              <div class="client-item">
-                <img src="assets/images/client-01.png" alt="4">
-              </div>
-              
-              <div class="client-item">
-                <img src="assets/images/client-01.png" alt="5">
-              </div>
-              
-              <div class="client-item">
-                <img src="assets/images/client-01.png" alt="6">
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    
     <footer>
       <div class="container">
         <div class="row">
           <div class="col-md-12">
             <div class="inner-content">
-              <p>National ChiNan University</p>
+              <!-- Google Translate -->
+              <div id="google_translate_element"></div>
+              <br>
+              <!--  -->
+              <p>Address: 4th Floor, Administration Building, No. 1 University Road, Puli Town, Nantou County, 545</p> 
+              <p>Tel: 886-49-2910960 ext. 2230~2233</p>
+              <p>Hotline: 886-49-2918305</p>
+              <p>Fax: 886-49-2913784</p>
+              <p>EMAIL: admission@ncnu.edu.tw</p>
+              
             </div>
           </div>
         </div>
       </div>
     </footer>
-
 
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
@@ -297,6 +269,18 @@
           }
       }
     </script>
+
+    <!-- Google Translate -->
+    <script>
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement(
+                {pageLanguage: 'en'},
+                'google_translate_element'
+            );
+        }
+    </script>
+    <script src="http://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 
 
   </body>
