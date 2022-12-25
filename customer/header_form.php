@@ -54,8 +54,9 @@
                   
               </a>
               </li> 
+              <!-- Update -->
               <!-- <li class="nav-item">
-                <a class="nav-link" href="student_insert.php">Student's Information </a>
+                <a class="nav-link" href="update_all.php">Update </a>
               </li> -->
               
               <!-- <li class="nav-item">

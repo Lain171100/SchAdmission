@@ -36,8 +36,13 @@
                   <div class="col-lg-12">
                     <fieldset>
                         <button onclick="location.href='home_page.php' " class="filled-button"> Home Page </button>
+                        <button onclick="location.href='update_all.php' " class="filled-button"> Update Data Page </button>
                     </fieldset>
                   </div>
+
+                  <!--  -->
+                  
+                  <!--  -->
                 </div>
               
 

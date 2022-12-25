@@ -103,7 +103,7 @@
                         echo "<tr>";
                         echo "<th scope='row'>". ($i+1).  "</th>";
                         echo "<td>$did</td>";
-                        echo "<td><a href='<?php echo $appform; ?>'>$appform</a></td>";
+                        echo "<td>$appform</td>";
                         echo "<td>$pass</td>";
                         echo "<td>$dip</td>";
                         echo "<td>$transcript</td>";
@@ -114,8 +114,8 @@
                         echo "<td>$doc2</td>";
 
                         echo "<td>
-                                <a href='docsubmit_insert.php?did=$did' class='btn btn-outline-info'>Insert New Data</a> <br><br>                                
-                                <a href='docsubmit_delete.php?did=$did' class='btn btn-outline-danger'>Delete</a>
+                                
+                                <a href='download.php?did=$did'>Download</a>
                               </td>";
                         
                         echo "</tr>";

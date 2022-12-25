@@ -1,20 +1,34 @@
 <?php
-    
+    session_start();
     include('connect.php');
-    include('../admin/teacher_header.php');
+    include('autoid_functions.php');
+    include('header_form.php');
 
-    if(isset($_REQUEST['cid']))
+    if (isset($_SESSION['sid']))
     {
-        $data=$_REQUEST['cid'];
+        $sid=$_SESSION['sid'];
 
-        $sql="SELECT * FROM c_language
-              WHERE cid='$data'  ";
-        
-        $query=mysqli_query($connection,$sql);
-        $count=mysqli_fetch_array($query);
-        
+        $query= "SELECT * FROM stu s, student st, eduback edu, c_language c, program p, scholar sc, doc_submit d
+              WHERE s.stuid = st.stuid
+              AND s.eid = edu.eid
+              AND s.pid = p.pid
+              AND s.cid = c.cid
+              AND s.slid = sc.slid
+              AND s.did = d.did
+              AND s.sid ='$sid'";
+        $sql=mysqli_query($connection, $query);
+        $rows=mysqli_fetch_array($sql);
+
+        $cid=$rows['cid'];
+        $ctime=$rows['ctime'];
+        $cplace=$rows['cplace'];
+        $listening=$rows['listening'];
+        $speaking=$rows['speaking'];
+        $reading=$rows['reading'];
+        $writing=$rows['writing'];
 
     }
+
 
     if(isset($_POST['btnupdate']))
     {
@@ -25,6 +39,8 @@
         $cbospeaking=$_POST['cbospeaking'];
         $cboreading=$_POST['cboreading'];
         $cbowriting=$_POST['cbowriting'];
+        // student id
+        $studentid=$_POST['txtstudentid'];
 
         $update="UPDATE c_language
                  SET ctime='$txtyear',
@@ -34,11 +50,11 @@
                      reading='$cboreading',
                      writing='$cbowriting'
                  WHERE cid='$txtcid' ";
-        $query=mysqli_query($connection,$update);
-        if($query)
+        $updatequery=mysqli_query($connection,$update);
+        if($updatequery)
         {
             echo "<script>window.alert('Chinese Proficiency Level  is Updated')</script>";
-            echo "<script>window.location='chinesepro_data.php'</script>";
+            echo "<script>window.location='update_all.php'</script>";
         }
         else{
             echo "<p>Something Went Wrong in Staff Update".mysqli_error($connection)."</p>";
@@ -49,94 +65,138 @@
 
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chinese Proficiency Update</title>
-    <!-- <link rel="stylesheet" href="formstyle.css"> -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
-    <link rel="stylesheet" href="../admin/css/style.css"> 
-</head>
-<body>
 
-    <form action="chinesepro_update.php" method="POST" enctype="multiplepart/form-data">
+<!-- form section starts  -->
 
-        <legend>IV. Chinese Proficiency Level</legend>
-    <div>
-        <div>
-            <label for="">Chinese Language ID</label>
-            <input type="text" class="form-control" name="txtcid" placeholder="" value="<?= $count['cid'] ?>" readonly>
-        </div>
+<section class="contact" id="contact">
 
-        <div>
-            <label for="">1.How Long Have You Studied Chinese?</label>
-            <input type="text" class="form-control" name="txtyear" value="<?= $count['ctime'] ?>" placeholder="Year That You Studied Chinese" required>
-        </div>
+    <div class="send-message">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="section-heading">
+              <h2>Chinese Proficiency Level</h2>
+              
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="contact-form">
+              <form id="contact" action="chinesepro_update.php" method="POST" enctype="multipart/form-data">
+                <!-- Chinese Proficiency ID -->
+                <div class="row">
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                        <label for="">Chinese Language ID</label>
+                        <input class="form-control" type="text" name="txtcid" placeholder="" value="<?= $cid ?>" readonly>
+                    </fieldset>
+                  </div>
 
-        <div>
-            <label for="">2.Organization or Place Where You Studied Chinese?</label>
-            <input type="text" class="form-control" name="txtplace" value="<?= $count['cplace'] ?>" placeholder="Place That You Studied Chinese" required>
-        </div>
+                <!-- Year that Studied Chinese -->
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                        <label for="">How Long Have You Studied Chinese? (E.g. 1 - year / 1 - month)</label>
+                        <input class="form-control" type="text" name="txtyear" value="<?= $ctime ?>" placeholder="Enter Year That You Studied Chinese" required>
+                    </fieldset>
+                  </div>
+
+                <!-- Place/Organization that Studied Chinese -->
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                        <label for="">Organization or Place Where You Studied Chinese?</label>
+                        <input class="form-control" type="text" name="txtplace" value="<?= $cplace ?>" placeholder="Organization/Place That You Studied Chinese" required>
+                    </fieldset>
+                  </div>
+
+                  <!-- Listening Level -->
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                        <label for="" class="">Listening Level</label>
+                        <select name="cbolistening" class="form-control" required>
+                            <option value="<?= $listening ?>"><?= $listening ?></option>
+                            <option value="">Choose One Level</option>
+                            <option value="Excellent">Excellent</option>
+                            <option value="Good">Good</option>
+                            <option value="Average">Average</option>
+                            <option value="Poor">Poor</option>
+                        </select>
+                    </fieldset>
+                  </div>
+                  
+                  <!-- Speaking Level -->
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                      <br>
+                        <label for="" class="">Speaking Level</label>
+                        <select name="cbospeaking" class="form-control" required>
+                            <option value="<?= $speaking ?>"><?= $speaking ?></option>
+                            <option value="">Choose One Level</option>
+                            <option value="Excellent">Excellent</option>
+                            <option value="Good">Good</option>
+                            <option value="Average">Average</option>
+                            <option value="Poor">Poor</option>
+                        </select>
+                    </fieldset>
+                  </div>
+
+                  <!-- Reading Skill  -->
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                      <br>
+                        <label for="" class="">Reading Skill</label>
+                        <select name="cboreading" class="form-control" required>
+                            <option value="<?= $reading ?>"><?= $reading ?></option>
+                            <option value="">Choose One Level</option>
+                            <option value="Excellent">Excellent</option>
+                            <option value="Good">Good</option>
+                            <option value="Average">Average</option>
+                            <option value="Poor">Poor</option>
+                        </select>
+                    </fieldset>
+                  </div>
+
+                  <!-- Writing Skill -->
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                      <br>
+                        <label for="" class="">Writing Skill</label>
+                        <select name="cbowriting" class="form-control" required>
+                            <option value="<?= $writing ?>"><?= $writing ?></option>
+                            <option value="">Choose One Level</option>
+                            <option value="Excellent">Excellent</option>
+                            <option value="Good">Good</option>
+                            <option value="Average">Average</option>
+                            <option value="Poor">Poor</option>
+                        </select>
+                    </fieldset>
+                  </div>
+
+     
+                <!-- Button -->
+                  <div class="col-lg-12">
+                    <fieldset>
+                        <input type="text" name="txtstudentid" value="<?php echo $_SESSION['sid']; ?>" hidden>
+                        <br>
+                        <button class="btn btn-info" type="submit" name="btnupdate" value="Update">Update</button>
+                        <button class="btn btn-danger" type="reset" name="btncancel" value="Cancel" onclick="location.href='update_all.php' ">Cancel</button>
+                    </fieldset>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+
+  
+</form>
+
+</section>
+
+<!-- form section ends -->
+
+
         
-        <div class="">
-            <label for="" class="">Listening</label>
-            <select name="cbolistening" class="custom-select"  required>
-                <option value="<?= $count['listening'] ?>"><?= $count['listening'] ?></option>
-                <option value="">Choose One Level</option>
-                <option value="Excellent">Excellent</option>
-                <option value="Good">Good</option>
-                <option value="Average">Average</option>
-                <option value="Poor">Poor</option>
-            </select>
-        </div>
-
-        <div class="">
-            <label for="" class="">Speaking</label>
-            <select name="cbospeaking" class="custom-select">
-                <option value="<?= $count['speaking'] ?>"><?= $count['speaking'] ?></option>
-                <option value="">Choose One Level</option>
-                <option value="Excellent">Excellent</option>
-                <option value="Good">Good</option>
-                <option value="Average">Average</option>
-                <option value="Poor">Poor</option>
-            </select>
-        </div>
-
-        <div class="">
-            <label for="" class="">Reading</label>
-            <select name="cboreading" class="custom-select">
-                 <option value="<?= $count['reading'] ?>"><?= $count['reading'] ?></option>
-                <option value="">Choose One Level</option>
-                <option value="Excellent">Excellent</option>
-                <option value="Good">Good</option>
-                <option value="Average">Average</option>
-                <option value="Poor">Poor</option>
-            </select>
-        </div>
-
-        <div class="">
-            <label for="" class="">Writing</label>
-            <select name="cbowriting" class="custom-select">
-                 <option value="<?= $count['writing'] ?>"><?= $count['writing'] ?></option>
-                <option value="">Choose One Level</option>
-                <option value="Excellent">Excellent</option>
-                <option value="Good">Good</option>
-                <option value="Average">Average</option>
-                <option value="Poor">Poor</option>
-            </select>
-        </div>
-
-        <br>
-        <div>
-            <input class="btn btn-info" type="submit" name="btnupdate" value="Update">
-            <input class="btn btn-danger" type="reset" name="btncancel" value="Cancel" onclick="location.href='chinesepro_data.php' ">
-        </div>
-
-    </form>
 </body>
 </html>
 
-
+<?php
+    include('footer.php');
+?>

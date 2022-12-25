@@ -14,20 +14,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
         <link rel="stylesheet" href="../admin/css/style.css">
 
-        <!-- Data Table -->
-        <script type="text/javascript" src="js/jquery-3.1.1.slim.min.js"></script>
-	    <script type="text/javascript" src="DataTable/datatables.min.js"></script>
-	    <link rel="stylesheet" type="text/css" href="DataTable/datatables.min.css"/>
-
         <legend align="center">Education Background Data Lists</legend>
-    
-        
-        <script>
-		$(document).ready( function ()
-		{
-		    $('#tableid').DataTable();
-		} );
-	    </script>
 
         <!-- <div>
         <a href="eduback_insert.php" class="btn btn-primary"><img src="https://img.icons8.com/ios/20/000000/plus--v1.png"/> Education Background Registration Form</a>  <br><br>
@@ -177,11 +164,5 @@
     </body>
 </html>
 
-
-
-<?php
-    include('footer.php');
-
-?>
 
  

@@ -4,6 +4,7 @@
     include('connect.php');
     
 
+    // If the students login failed for 3 times, login timer will appear.
     if (isset($_SESSION['count'])) 
 	{
 		$count=$_SESSION['count'];

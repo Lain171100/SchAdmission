@@ -1,19 +1,33 @@
 <?php
-    
+    session_start();
     include('connect.php');
-    include('../admin/teacher_header.php');
+    include('autoid_functions.php');
+    include('header_form.php');
 
-    if(isset($_REQUEST['pid']))
+    if (isset($_SESSION['sid']))
     {
-        $data=$_REQUEST['pid'];
+        $sid=$_SESSION['sid'];
 
-        $sql="SELECT * FROM program
-              WHERE pid='$data'  ";
-        
-        $query=mysqli_query($connection,$sql);
-        $count=mysqli_fetch_array($query);        
+        $query= "SELECT * FROM stu s, student st, eduback edu, c_language c, program p, scholar sc, doc_submit d
+              WHERE s.stuid = st.stuid
+              AND s.eid = edu.eid
+              AND s.pid = p.pid
+              AND s.cid = c.cid
+              AND s.slid = sc.slid
+              AND s.did = d.did
+              AND s.sid ='$sid'";
+        $sql=mysqli_query($connection, $query);
+        $rows=mysqli_fetch_array($sql);
+
+        $pid=$rows['pid'];
+        $season=$rows['season'];
+        $edulevel=$rows['edulevel'];
+        $fcdep=$rows['fcdep'];
+        $scdep=$rows['scdep'];
+        $tcdep=$rows['tcdep'];
 
     }
+
 
     if(isset($_POST['btnupdate']))
     {
@@ -23,6 +37,8 @@
         $cbofirst=$_POST['cbofirst'];
         $cbosecond=$_POST['cbosecond'];
         $cbothird=$_POST['cbothird'];
+        // student id
+        $studentid=$_POST['txtstudentid'];
 
         $update="UPDATE program
                  SET season='$cboseason',
@@ -35,7 +51,7 @@
         if($query)
         {
             echo "<script>window.alert('Program Data is Updated')</script>";
-            echo "<script>window.location='program_data.php'</script>";
+            echo "<script>window.location='update_all.php'</script>";
         }
         else{
             echo "<p>Something Went Wrong in Program Update".mysqli_error($connection)."</p>";
@@ -46,108 +62,157 @@
 
 ?>
 
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Program and Department Data Update</title>
-    <!-- <link rel="stylesheet" href="formstyle.css"> -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
-    <link rel="stylesheet" href="../admin/css/style.css"> 
+    <title>Choose Department Update</title>
 </head>
 <body>
 
-    <form action="program_update.php" method="POST" enctype="multiplepart/form-data">
 
-         <legend><b>Please Indicate to which department and program you are applying at NCNU</b></legend>
-        <div>
-            <label for=""><b>Choose and Fill Program</b></label>
-        </div>
-            <!-- Program ID -->
-        <div>
-            <label for="">Program ID:</label>
-            <input class="form-control" type="text" name="txtpid" value="<?= $count['pid'] ?>" readonly>
-        </div> 
-            <!-- Choose Season -->
-        <div class="">
-            <label for="" >Choose Season:</label>
-            <select name="cboseason" class="custom-select">
-                 <option value="<?= $count['season'] ?>"><?= $count['season'] ?></option>
-                <option value="">Choose One Season</option>
-                <option value="Spring">Spring</option>
-                <option value="Fall">Fall</option>
-            </select>
-        </div>
+<!-- form section starts  -->
 
-        <!-- Choose Education Level -->
-        <div class="">
-            <label for="" class="">Choose Education Level That You Want To Apply:</label>
-            <select name="cbolevel" class="custom-select">
-                <option value="<?= $count['edulevel'] ?>"><?= $count['edulevel'] ?></option>
-                <option value="">Choose One Level</option>
-                <option value="Bachelor">Bachelor</option>
-                <option value="Master">Master</option>
-                <option value="PhD">Doctoral(PhD)</option>
-            </select>
-        </div>
+<section class="contact" id="contact">
 
-        <!-- First Choice -->
-        <div class="">
-            <label for="" class="">First Choice Department/Institute</label>
-            <select name="cbofirst" class="custom-select">
-                <option value="<?= $count['fcdep'] ?>"><?= $count['fcdep'] ?></option>
-                <option value="">Choose One Department</option>
-                <option value="Computer Science and Information Engineering">Computer Science and Information Engineering</option>
-                <option value="Information Management">Information Management</option>
-                <option value="Education">Education</option>
-                <option value="Tourism">Tourism</option>
-                <option value="Electrical Engineering">Electrical Engineering</option>
-                <option value="Civil Engineering">Civil Engineering</option>
-                <option value="AI">AI</option>
-                <option value="Bio Chemistry">Bio Chemistry</option>
-            </select>
-        </div>
+    <div class="send-message">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="section-heading">
+              <h2>Please Update to which department and program you are applying at NCNU</h2>
+               
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="contact-form">
+              <form id="contact" action="program_update.php" method="POST" enctype="multipart/form-data">
+                <!-- Program ID -->
+                <div class="row">
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                        <label for="">Program ID:</label>
+                        <input class="form-control" type="text" name="txtpid" value="<?= $pid ?>" readonly>
+                    </fieldset>
+                  </div>
 
-        <!-- Second Choice Department/Institute -->
-        <div class="">
-            <label for="" class="">Second Choice Department/Institute</label>
-            <select name="cbosecond" class="custom-select">
-                <option value="<?= $count['scdep'] ?>"><?= $count['scdep'] ?></option>
-                <option value="">Choose One Department</option>
-                <option value="Computer Science and Information Engineering">Computer Science and Information Engineering</option>
-                <option value="Information Management">Information Management</option>
-                <option value="Education">Education</option>
-                <option value="Tourism">Tourism</option>
-                <option value="Electrical Engineering">Electrical Engineering</option>
-                <option value="Civil Engineering">Civil Engineering</option>
-                <option value="AI">AI</option>
-                <option value="Bio Chemistry">Bio Chemistry</option>
-            </select>
-        </div>
-        <!-- Third Choice Department/Institute -->
-        <div class="">
-            <label for="" class="">Third Choice Department/Institute</label>
-            <select name="cbothird" class="custom-select">
-                <option value="<?= $count['tcdep'] ?>"><?= $count['tcdep'] ?></option>
-                <option value="">Choose One Department</option>
-                <option value="Computer Science and Information Engineering">Computer Science and Information Engineering</option>
-                <option value="Information Management">Information Management</option>
-                <option value="Education">Education</option>
-                <option value="Tourism">Tourism</option>
-                <option value="Electrical Engineering">Electrical Engineering</option>
-                <option value="Civil Engineering">Civil Engineering</option>
-                <option value="AI">AI</option>
-                <option value="Bio Chemistry">Bio Chemistry</option>
-            </select>
-        </div>
-        <!-- Button -->
-        <br>
-       <div>
-            <input class="btn btn-info" type="submit" name="btnupdate" value="Update">
-            <input class="btn btn-danger" type="reset" name="btncancel" value="Cancel" onclick="location.href='program_data.php' " >
-        </div>
-    </form>
+                  <!-- Choose Season -->
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                        <label for="" class="">Choose Season:</label>
+                        <select name="cboseason" class="form-control" required>
+                            <option value="<?= $season ?>"><?= $season ?></option>
+                            <option value="">Choose One Season</option>
+                            <option value="Spring">Spring</option>
+                            <option value="Fall">Fall</option>
+                        </select>
+                    </fieldset>
+                  </div>
+                  
+                  <!-- Choose Education Level -->
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                      <br>
+                        <label for="" class="">Choose Education Level That You Want To Apply:</label>
+                        <select name="cbolevel" class="form-control" required>
+                            <option value="<?= $edulevel ?>"><?= $edulevel ?></option>
+                            <option value="">Choose One Level</option>
+                            <option value="Bachelor">Bachelor</option>
+                            <option value="Master">Master</option>
+                            <option value="PhD">Doctoral(PhD)</option>
+                        </select>
+                    </fieldset>
+                  </div>
+
+                  <!-- First Choice  -->
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                      <br>
+                        <label for="" class="">First Choice Department/Institute</label>
+                        <select name="cbofirst" class="form-control" required>
+                            <option value="<?= $fcdep ?>"><?= $fcdep ?></option>
+                            <option value="">Choose One Department</option>
+                            <option value="Computer Science and Information Engineering">Computer Science and Information Engineering</option>
+                            <option value="Information Management">Information Management</option>
+                            <option value="Education">Education</option>
+                            <option value="Tourism">Tourism</option>
+                            <option value="Electrical Engineering">Electrical Engineering</option>
+                            <option value="Civil Engineering">Civil Engineering</option>
+                            <option value="AI">AI</option>
+                            <option value="Bio Chemistry">Bio Chemistry</option>
+                        </select>
+                    </fieldset>
+                  </div>
+
+                  <!-- Second Choice Department/Institute -->
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                      <br>
+                        <label for="" class="">Second Choice Department/Institute</label>
+                        <select name="cbosecond" class="form-control" required>
+                            <option value="<?= $scdep ?>"><?= $scdep ?></option>
+                            <option value="">Choose One Department</option>
+                            <option value="Computer Science and Information Engineering">Computer Science and Information Engineering</option>
+                            <option value="Information Management">Information Management</option>
+                            <option value="Education">Education</option>
+                            <option value="Tourism">Tourism</option>
+                            <option value="Electrical Engineering">Electrical Engineering</option>
+                            <option value="Civil Engineering">Civil Engineering</option>
+                            <option value="AI">AI</option>
+                            <option value="Bio Chemistry">Bio Chemistry</option>
+                        </select>
+                    </fieldset>
+                  </div>
+
+                 <!-- Third Choice Department/Institute -->
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                      <br>
+                      <label for="" class="">Third Choice Department/Institute</label>
+                    <select name="cbothird" class="form-control" required>
+                        <option value="<?= $tcdep ?>"><?= $tcdep ?></option>
+                        <option value="">Choose One Department</option>
+                        <option value="Computer Science and Information Engineering">Computer Science and Information Engineering</option>
+                        <option value="Information Management">Information Management</option>
+                        <option value="Education">Education</option>
+                        <option value="Tourism">Tourism</option>
+                        <option value="Electrical Engineering">Electrical Engineering</option>
+                        <option value="Civil Engineering">Civil Engineering</option>
+                        <option value="AI">AI</option>
+                        <option value="Bio Chemistry">Bio Chemistry</option>
+                    </select>
+                    </fieldset>
+                  </div>
+                  
+                <!-- Button -->
+                  <div class="col-lg-12">
+                    <fieldset>
+                        <input type="text" name="txtstudentid" value="<?php echo $_SESSION['sid']; ?>" hidden>
+                        <br>
+                        <button class="btn btn-info" type="submit" name="btnupdate" value="Update">Update</button>
+                        <button class="btn btn-danger" type="reset" name="btncancel" value="Cancel" onclick="location.href='update_all.php' ">Cancel</button>
+                    </fieldset>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+
+  
+</form>
+
+</section>
+
+<!-- form section ends -->
+
+</form>
 </body>
 </html>
+
+<?php
+    include('footer.php');
+?>

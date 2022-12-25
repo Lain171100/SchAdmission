@@ -1,17 +1,58 @@
 <?php
-
+    session_start();
     include('connect.php');
     include('autoid_functions.php');
+    include('header_form.php');
 
-    if(isset($_GET['eid']))
+    if (isset($_SESSION['sid']))
     {
-        $txteid=$_GET['eid'];
+        $sid=$_SESSION['sid'];
 
-        $sql="SELECT * FROM eduback
-              WHERE eid='$txteid' ";
-        
-        $query=mysqli_query($connection,$sql);
-        $count=mysqli_fetch_array($query);
+        $query= "SELECT * FROM stu s, student st, eduback edu, c_language c, program p, scholar sc, doc_submit d
+              WHERE s.stuid = st.stuid
+              AND s.eid = edu.eid
+              AND s.pid = p.pid
+              AND s.cid = c.cid
+              AND s.slid = sc.slid
+              AND s.did = d.did
+              AND s.sid ='$sid'";
+        $sql=mysqli_query($connection, $query);
+        $rows=mysqli_fetch_array($sql);
+
+        // High School
+        $eid=$rows['eid'];
+        $hname=$rows['hname'];
+        $hlocation=$rows['hlocation'];
+        $hdegree=$rows['hdegree'];
+        $hdate=$rows['hdate'];
+        $hmajor=$rows['hmajor'];
+        $hminor=$rows['hminor'];
+        $hgpa=$rows['hgpa'];
+        // University
+        $uname=$rows['uname'];
+        $ulocation=$rows['ulocation'];
+        $udegree=$rows['udegree'];
+        $udate=$rows['udate'];
+        $umajor=$rows['umajor'];
+        $uminor=$rows['uminor'];
+        $ugpa=$rows['ugpa'];
+        // Master
+        $mname=$rows['mname'];
+        $mlocation=$rows['mlocation'];
+        $mdegree=$rows['mdegree'];
+        $mdate=$rows['mdate'];
+        $mmajor=$rows['mmajor'];
+        $mminor=$rows['mminor'];
+        $mgpa=$rows['mgpa'];
+        // 
+        $dname=$rows['dname'];
+        $dlocation=$rows['dlocation'];
+        $ddegree=$rows['ddegree'];
+        $ddate=$rows['ddate'];
+        $dmajor=$rows['dmajor'];
+        $dminor=$rows['dminor'];
+        $dgpa=$rows['dgpa'];
+
     }
 
     if(isset($_POST['btnupdate']))
@@ -48,6 +89,8 @@
         $txtdmajor=$_POST['txtdmajor'];
         $txtdminor=$_POST['txtdminor'];
         $txtdgpa=$_POST['txtdgpa'];
+        // student id
+        $studentid=$_POST['txtstudentid'];
 
         // --- Update Data --- //
         $update="UPDATE eduback
@@ -90,7 +133,7 @@
         if($query)
         {
             echo "<script>window.alert('Education Background's Data Update Successfully')</script>";
-            echo "<script>window.location='eduback_data.php'</script>";
+            echo "<script>window.location='update_all.php'</script>";
         }
         else{
             echo "<p>Something Went Wrong</p>";
@@ -99,203 +142,307 @@
 
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Education Background Update</title>
-    <!-- <link rel="stylesheet" href="../admin/formstyle.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
-    <link rel="stylesheet" href="../admin/css/style.css"> -->
+    <title>Student's Educational Background Update</title>
+
 </head>
 <body>
-    <form action="eduback_update.php" method="POST" enctype="multipart/form-data">
-    <legend><b>Applicant’s Educational Background</b></legend><br>
+
+<!-- form section starts -->
+
     
-    <!-- Educational BackGround ID -->
-    <div>
-        <label for=""><b>Educational Background ID</b></label>
-        <input type="text" name="txteid" id="" value="<?= $count['eid'] ?>" readonly>
+    <div class="send-message">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="section-heading">
+              <h2>Student's Educational Background Update</h2>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="contact-form">
+              <form id="contact" action="eduback_update.php" method="POST" enctype="multipart/form-data">
+                <!-- Education Background ID -->
+                <div class="row">
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                        <label for="" hidden>Educational Background ID</label>
+                        <input type="text" class="form-control" name="txteid" id="" value="<?= $eid ?>" hidden>
+                    </fieldset>
+                  </div>
+
+                  <!-- High School -->
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                        <h4>High School</h4>
+                        <br>
+                        <label for="">Name of High School:</label>
+                        <input type="text" class="form-control" name="txthname" value="<?= $hname ?>" placeholder="Enter Name of High School" required>
+                    </fieldset>
+                  </div>
+
+                  <!-- Location of High School -->
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                        <label for="">Location of High School:</label>
+                        <input type="text" class="form-control" name="txthlocation" value="<?= $hlocation ?>" placeholder="Enter Location of High School" required>
+                    </fieldset>
+                  </div>
+
+                  <!-- Degree in High School -->
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                        <label for="">Degree in High School:</label>
+                        <input type="text" class="form-control" name="txthdegree" value="<?= $hdegree ?>" placeholder="Enter Degree in High School" required>
+                    </fieldset>
+                  </div>
+
+                   <!-- Date Enrolled in High School -->
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                        <label for="">Date Enrolled in High School:</label>
+                        <input type="date" class="form-control  " name="txthdate" value="<?= $hdate ?>" placeholder="Date Enrolled in High School" required>
+                    </fieldset>
+                  </div>
+
+                   <!-- Major in High School -->
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                        <label for="">Major in High School:</label>
+                        <input type="text" class="form-control" name="txthmajor" value="<?= $hmajor ?>" placeholder="Enter Major in High School" required>
+                    </fieldset>
+                  </div>
+
+                  <!-- Minor in High School -->
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                        <label for="">Minor in High School:</label>
+                        <input type="text" class="form-control" name="txthminor" value="<?= $hminor ?>" placeholder="Enter Minor in High School" required>
+                    </fieldset>
+                  </div>
+
+                  <!-- GPA in High School -->
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                        <label for="">GPA in High School:</label>
+                        <input type="text" class="form-control" name="txthgpa" value="<?= $hgpa ?>" placeholder="Enter GPA in High School" required>
+                    </fieldset>
+                  </div>
+                
+                  <!--  -->
+                  <!--  -->
+                <!-- Master School -->
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                        <h4>Master's Program</h4>
+                        <br>
+                        <label for="">Name of Master's Program:</label>
+                         <input type="text" class="form-control" name="txtmname" value="<?= $mname ?>" placeholder="Enter Name of Master's Program" >
+                    </fieldset>
+                  </div>
+
+                  <!-- Location of Master's Program -->
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                        <label for="">Location of Master's Program:</label>
+                        <input type="text" class="form-control" name="txtmlocation" value="<?= $mlocation ?>" placeholder="Enter Location of Master's Program" >
+                    </fieldset>
+                  </div>
+
+                  <!-- Degree in Master's Program -->
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                        <label for="">Degree in Master's Program:</label>
+                        <input type="text" class="form-control" name="txtmdegree" value="<?= $mdegree ?>" placeholder="Enter Degree in Master's Program" >
+                    </fieldset>
+                  </div>
+
+                   <!-- Date Enrolled in Master's Program -->
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                        <label for="">Date Enrolled in Master's Program:</label>
+                        <input type="date" class="form-control" name="txtmdate" value="<?= $mdate ?>" placeholder="Date Enrolled in Master's Program" >
+                    </fieldset>
+                  </div>
+
+                   <!-- Major in Master's Program -->
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                        <label for="">Major in Master's Program:</label>
+                        <input type="text" class="form-control" name="txtmmajor" value="<?= $mmajor ?>" placeholder="Enter Major in Master's Program" >
+                    </fieldset>
+                  </div>
+
+                  <!-- Minor in Master's Program -->
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                        <label for="">Minor in Master's Program:</label>
+                        <input type="text" class="form-control" name="txtmminor" value="<?= $mminor ?>" placeholder="Enter Minor in Master's Program" >
+                    </fieldset>
+                  </div>
+
+                  <!-- GPA in Master's Program -->
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                        <label for="">GPA in Master's Program:</label>
+                        <input type="text" class="form-control" name="txtmgpa" value="<?= $mgpa ?>" placeholder="Enter GPA in Master's Program">
+                    </fieldset>
+                  </div>
+
+
+                  <!-- Button -->
+                  <div class="col-lg-12">
+                    <fieldset>
+                        <input type="text" name="txtstudentid" value="<?php echo $_SESSION['sid']; ?>" hidden>
+                        <button class="btn btn-primary" type="submit" name="btnupdate" value="Update">Update</button>
+                        <button class="btn btn-danger" type="reset" name="btncancel" value="Cancel" onclick="location.href='update_all.php' ">Cancel</button>
+                    </fieldset>
+                  </div>
+                </div>
+              
+            </div>
+          </div>
+
+          <!-- Second Division -->
+        
+          <div class="col-md-6">
+          <div class="contact-form">
+            <!-- Name of College/University -->   
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <fieldset>
+                    <h4>College or University</h4>
+                    <br>
+                    <label for="">Name of College/University</label>
+                    <input type="text" class="form-control" name="txtuname" value="<?= $uname ?>" placeholder="Enter Name of College/University" required>
+                </fieldset>
+            </div>
+
+            <!-- Location of College/University -->   
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <fieldset>
+                    <label for="">Location of College/University</label>
+                    <input type="text" class="form-control" name="txtulocation" value="<?= $ulocation ?>" placeholder="Enter Location of College School" required>
+                </fieldset>
+            </div>
+
+            <!-- Degree in College/University -->   
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <fieldset>
+                    <label for="">Degree in College/University</label>
+                    <input type="text" class="form-control" name="txtudegree" value="<?= $udegree ?>" placeholder="Enter Degree in College School" required>
+                </fieldset>
+            </div>
+
+            <!-- Date Enrolled in College/University -->   
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <fieldset>
+                    <label for="">Date Enrolled in College/University</label>
+                    <input type="date" class="form-control" name="txtudate" value="<?= $udate ?>" placeholder="Date Enrolled in High School" required>
+                </fieldset>
+            </div>
+
+            <!-- Major in College/University -->   
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <fieldset>
+                    <label for="">Major in College/University</label>
+                    <input type="text" class="form-control" name="txtumajor" value="<?= $umajor ?>" placeholder="Enter Major in College School" required>
+                </fieldset>
+            </div>
+
+            <!-- Minor in College/University -->   
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <fieldset>
+                    <label for="">Minor in College/University</label>
+                    <input type="text" class="form-control" name="txtuminor" value="<?= $uminor ?>" placeholder="Enter Minor in College School" required>
+                </fieldset>
+            </div>
+
+
+            <!-- GPA in College/University -->   
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <fieldset>
+                    <label for="">GPA in College/University</label>
+                    <input type="text" class="form-control" name="txtugpa" value="<?= $ugpa ?>" placeholder="Enter GPA in College School" required>
+                </fieldset>
+            </div>
+
+            <!--  -->
+            <!-- Doctoral -->
+            
+            <!-- Name of Doctoral -->   
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <fieldset>
+                    <h4>Doctoral's Program</h4>
+                    <br>
+                    <label for="">Name of Doctoral's Program</label>
+                    <input type="text" class="form-control" name="txtdname" value="<?= $dname ?>" placeholder="Enter Name of Doctoral's Program">
+                </fieldset>
+            </div>
+
+            <!-- Location of Doctoral's Program -->   
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <fieldset>
+                    <label for="">Location of Doctoral's Program</label>
+                    <input type="text" class="form-control" name="txtdlocation" value="<?= $dlocation ?>" placeholder="Enter Location of Doctoral's Program">
+                </fieldset>
+            </div>
+
+            <!-- Degree in Doctoral's Program -->   
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <fieldset>
+                    <label for="">Degree in Doctoral's Program</label>
+                    <input type="text" class="form-control" name="txtddegree" value="<?= $ddegree ?>" placeholder="Enter Degree in Doctoral's Program">
+                </fieldset>
+            </div>
+
+            <!-- Date Enrolled in Doctoral's Program -->   
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <fieldset>
+                    <label for="">Date Enrolled in Doctoral's Program</label>
+                    <input type="date" class="form-control" name="txtddate" value="<?= $ddate ?>" placeholder="Date Enrolled in Doctoral's Program">
+                </fieldset>
+            </div>
+
+            <!-- Major in Doctoral's Program -->   
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <fieldset>
+                    <label for="">Major in Doctoral's Program</label>
+                     <input type="text" class="form-control" name="txtdmajor" value="<?= $dmajor ?>" placeholder="Enter Major in Doctoral's Program">
+                </fieldset>
+            </div>
+
+            <!-- Minor in Doctoral's Program -->   
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <fieldset>
+                    <label for="">Minor in Doctoral's Program</label>
+                    <input type="text" class="form-control" name="txtdminor" value="<?= $dminor ?>" placeholder="Enter Minor in Doctoral's Program">
+                </fieldset>
+            </div>
+
+            <!-- GPA in Doctoral's Program -->   
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <fieldset>
+                    <label for="">GPA in Doctoral's Program</label>
+                    <input type="text" class="form-control" name="txtdgpa" value="<?= $ddate ?>" placeholder="Enter GPA in Doctoral's Program">
+                </fieldset>
+            </div>
+
+
+        </form>
+       </div>
     </div>
-    <!--  -->
-      <div class="divTable">
-             <div class="headRow">
-                <div class="divCell" align="center">Programs</div>
-                <div  class="divCell">Name of School</div>
-                <div  class="divCell">School Location</div>
-                <div  class="divCell">Degree</div>
-                <div  class="divCell">Dates Enrolled</div>
-                <div  class="divCell">Major</div>
-                <div  class="divCell">Minor</div>
-                <div  class="divCell">GPA</div>
-             </div>
+    </div>
 
-            <div class="divRow">
-                <div class="divCell" align="center">High School</div>
-                <!-- Name of High School -->
-                <div class="divCell">
-                    <input type="text" name="txthname" value="<?= $count['hname'] ?>" placeholder="Name of High School">
-                </div>
-                <!-- Location of High School -->
-                <div class="divCell">
-                    <input type="text" name="txthlocation" value="<?= $count['hlocation'] ?>" placeholder="Location of High School">
-                </div>
-                <!-- Degree in High School -->
-                <div class="divCell">
-                    <input type="text" name="txthdegree" value="<?= $count['hdegree'] ?>" placeholder="Degree in High School">
-                </div>
-                <!-- Date Enrolled in High School -->
-                <div class="divCell">
-                    <input type="date" name="txthdate" value="<?= $count['hdate'] ?>" placeholder="Date Enrolled in High School">
-                </div>
-                <!-- Major in High School -->
-                <div class="divCell">
-                    <input type="text" name="txthmajor" value="<?= $count['hmajor'] ?>" placeholder="Major in High School">
-                </div>
-                <!-- Minor in High School -->
-                <div class="divCell">
-                    <input type="text" name="txthminor" value="<?= $count['hminor'] ?>" placeholder="Minor in High School">
-                </div>
-                <!-- GPA in High School -->
-                <div class="divCell">
-                    <input type="text" name="txthgpa" value="<?= $count['hgpa'] ?>" placeholder="GPA in High School">
-                </div>
-            </div>
-
-            <!-- College or University -->
-             <div class="divRow">
-                <div class="divCell" align="center">College or University</div>
-                <!-- Name of College School -->
-                <div class="divCell">
-                    <input type="text" name="txtuname" value="<?= $count['uname'] ?>" placeholder="Name of College School">
-                </div>
-                <!-- Location of College School -->
-                <div class="divCell">
-                    <input type="text" name="txtulocation" value="<?= $count['ulocation'] ?>" placeholder="Location of College School">
-                </div>
-                <!-- Degree in College School -->
-                <div class="divCell">
-                    <input type="text" name="txtudegree" value="<?= $count['udegree'] ?>" placeholder="Degree in College School">
-                </div>
-                <!-- Date Enrolled in High School -->
-                <div class="divCell">
-                    <input type="date" name="txtudate" value="<?= $count['udate'] ?>" placeholder="Date Enrolled in High School">
-                </div>
-                <!-- Major in College School -->
-                <div class="divCell">
-                    <input type="text" name="txtumajor" value="<?= $count['umajor'] ?>" placeholder="Major in College School">
-                </div>
-                <!-- Minor in College School -->
-                <div class="divCell">
-                    <input type="text" name="txtuminor" value="<?= $count['uminor'] ?>" placeholder="Minor in College School">
-                </div>
-                <!-- GPA in College School -->
-                <div class="divCell">
-                    <input type="text" name="txtugpa" value="<?= $count['ugpa'] ?>" placeholder="GPA in College School">
-                </div>
-            </div>
-
-            <!-- Master's Program -->
-             <div class="divRow">
-                <div class="divCell" align="center">Master's Program</div>
-                <!-- Name of Master's Program -->
-                <div class="divCell">
-                    <input type="text" name="txtmname" value="<?= $count['mname'] ?>" placeholder="Name of Master's Program">
-                </div>
-                <!-- Location of Master's Program -->
-                <div class="divCell">
-                    <input type="text" name="txtmlocation" value="<?= $count['mlocation'] ?>" placeholder="Location of Master's Program">
-                </div>
-                <!-- Degree in Master's Program -->
-                <div class="divCell">
-                    <input type="text" name="txtmdegree" value="<?= $count['mdegree'] ?>" placeholder="Degree in Master's Program">
-                </div>
-                <!-- Date Enrolled in Master's Program -->
-                <div class="divCell">
-                    <input type="date" name="txtmdate" value="<?= $count['mdate'] ?>" placeholder="Date Enrolled in Master's Program">
-                </div>
-                <!-- Major in Master's Program -->
-                <div class="divCell">
-                    <input type="text" name="txtmmajor" value="<?= $count['mmajor'] ?>" placeholder="Major in Master's Program">
-                </div>
-                <!-- Minor in Master's Program -->
-                <div class="divCell">
-                    <input type="text" name="txtmminor" value="<?= $count['mminor'] ?>" placeholder="Minor in Master's Program">
-                </div>
-                <!-- GPA in Master's Program -->
-                <div class="divCell">
-                    <input type="text" name="txtmgpa" value="<?= $count['mgpa'] ?>" placeholder="GPA in Master's Program">
-                </div>
-            </div>
-
-            <!-- Doctoral's Program -->
-             <div class="divRow">
-                <div class="divCell" align="center">Doctoral's Program</div>
-                <!-- Name of Doctoral's Program -->
-                <div class="divCell">
-                    <input type="text" name="txtdname" value="<?= $count['dname'] ?>" placeholder="Name of Doctoral's Program">
-                </div>
-                <!-- Location of Doctoral's Program -->
-                <div class="divCell">
-                    <input type="text" name="txtdlocation" value="<?= $count['dlocation'] ?>" placeholder="Location of Doctoral's Program">
-                </div>
-                <!-- Degree in Doctoral's Program -->
-                <div class="divCell">
-                    <input type="text" name="txtddegree" value="<?= $count['ddegree'] ?>" placeholder="Degree in Doctoral's Program">
-                </div>
-                <!-- Date Enrolled in Doctoral's Program -->
-                <div class="divCell">
-                    <input type="date" name="txtddate" value="<?= $count['ddate'] ?>" placeholder="Date Enrolled in Doctoral's Program">
-                </div>
-                <!-- Major in Doctoral's Program -->
-                <div class="divCell">
-                    <input type="text" name="txtdmajor" value="<?= $count['dmajor'] ?>" placeholder="Major in Doctoral's Program">
-                </div>
-                <!-- Minor in Doctoral's Program -->
-                <div class="divCell">
-                    <input type="text" name="txtdminor" value="<?= $count['dminor'] ?>" placeholder="Minor in Doctoral's Program">
-                </div>
-                <!-- GPA in Doctoral's Program -->
-                <div class="divCell">
-                    <input type="text" name="txtdgpa" value="<?= $count['dgpa'] ?>" placeholder="GPA in Doctoral's Program">
-                </div>
-            </div>
-
-
-      <!-- Button -->
-        <div>
-            <input class="btn btn-primary" type="submit" name="btnupdate" value="Update">
-            <input class="btn btn-danger" type="reset" name="btncancel" value="Cancel" onclick="location.href='eduback_data.php' ">
-        </div>
-    </form>
 </body>
 </html>
 
-
-<style type="text/css">
-    .divTable
-    {
-        display:  table;
-        width:auto;
-        background-color:#eee;
-        border:1px solid  #666666;
-        border-spacing:5px;/*cellspacing:poor IE support for  this*/
-       /* border-collapse:separate;*/
-    }
-
-    .divRow
-    {
-       display:table-row;
-       width:auto;
-    }
-
-    .divCell
-    {
-        float:left; /*fix for  buggy browsers*/
-        display:table-column;
-        width:170px;
-        background-color:#ccc;
-    }
-</style>
+<?php
+    include('footer.php');
+?>

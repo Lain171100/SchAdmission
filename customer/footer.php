@@ -30,7 +30,7 @@
           <div class="col-md-12">
             <div class="inner-content">
               <!-- Google Translate -->
-              <div id="google_translate_element"></div>
+              <!-- <div id="google_translate_element"></div> -->
               <br>
               <!--  -->
               <p>Address: 4th Floor, Administration Building, No. 1 University Road, Puli Town, Nantou County, 545</p> 

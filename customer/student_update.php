@@ -1,19 +1,49 @@
 <?php
-
+    session_start();
     include('connect.php');
     include('autoid_functions.php');
-    include('../admin/teacher_header.php');
+    include('header_form.php');
 
-    if(isset($_GET['stuid']))
+
+    if (isset($_SESSION['sid']))
     {
-        $studentid=$_GET['stuid'];
+        $sid=$_SESSION['sid'];
 
-        $sql="SELECT * FROM student
-              WHERE stuid='$studentid' ";
+        $query= "SELECT * FROM stu s, student st, eduback edu, c_language c, program p, scholar sc, doc_submit d
+              WHERE s.stuid = st.stuid
+              AND s.eid = edu.eid
+              AND s.pid = p.pid
+              AND s.cid = c.cid
+              AND s.slid = sc.slid
+              AND s.did = d.did
+              AND s.sid ='$sid'";
+        $sql=mysqli_query($connection, $query);
+        $rows=mysqli_fetch_array($sql);
+
+        $stuid=$rows['stuid'];
+        $stuCname=$rows['stuCname'];
+        $stuEname=$rows['stuEname'];
+        $passno=$rows['passno'];
+        $nationality=$rows['nationality'];
+        $sex=$rows['sex'];
+        $marital=$rows['marital'];
+        $dob=$rows['dob'];
+        $address=$rows['address'];
+        $email=$rows['email'];
+        $phno=$rows['phno'];
+        $lename=$rows['lename'];
+        $lerelation=$rows['lerelation'];
+        $leaddress=$rows['leaddress'];
+        $lephno=$rows['lephno'];
+        $ctname=$rows['ctname'];
+        $ctrelation=$rows['ctrelation'];
+        $ctaddress=$rows['ctaddress'];
+        $ctphno=$rows['ctphno'];
+        $roc=$rows['roc'];    
+
         
-        $query=mysqli_query($connection,$sql);
-        $count=mysqli_fetch_array($query);
     }
+
 
     if(isset($_POST['btnupdate']))
     {
@@ -37,6 +67,7 @@
         $txtctaddress=$_POST['txtctaddress'];
         $txtctphno=$_POST['txtctphno'];
         $rdo=$_POST['rdo'];
+        $studentid=$_POST['txtstudentid'];
 
         // --- Update Data --- //
         $update="UPDATE student
@@ -62,12 +93,12 @@
 
                  WHERE stuid='$txtstuid' ";
         
-        $query=mysqli_query($connection,$update);
+        $updatequery=mysqli_query($connection,$update);
 
-        if($query)
+        if($updatequery)
         {
-            echo "<script>window.alert('Student's Data Update Successfully')</script>";
-            echo "<script>window.location='student_data.php'</script>";
+            echo "<script>window.alert('Student's Data Update Successfully')</script>
+            <script>window.location='update_all.php'</script>";
         }
         else{
             echo "<p>Something Went Wrong</p>";
@@ -76,230 +107,243 @@
 
 ?>
 
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Update</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
-    <link rel="stylesheet" href="../admin/css/style.css"> 
+    <title>Student's Personal Information Update</title>
+
 </head>
 <body>
-    <form action="student_update.php" method="POST" enctype="multipart/form-data">
-        <legend align="center">Enter Student Informations</legend>
 
-        <!-- Student ID -->
-        <div>
-            <label for=""><b>Student ID</b></label>
-            <input type="text" class="form-control" name="txtstuid" id="" value="<?= $count['stuid'] ?>" readonly>
-        </div>
-        <!-- Name For Chinese -->
-        <div>
-            <label for="">Full Name (Chinese):</label>
-            <input type="text" class="form-control" name="txtstuCname" value="<?= $count['stuCname'] ?>" placeholder="Enter Chinese Name">
-        </div>
 
-        <!-- Name For English -->
-        <div>
-            <label for="">Full Name (English):</label>
-            <input type="text" class="form-control" name="txtstuEname" value="<?= $count['stuEname'] ?>" placeholder="Enter English Name" required>
-        </div>
+<!-- form section starts  -->
 
-        <!-- Passport No -->
-        <div>
-            <label for="">Passport No:</label>
-            <input type="text" class="form-control" name="txtpassno" value="<?= $count['passno'] ?>" placeholder="Enter Passport Number" required>
-        </div>
-            
-        <!-- Nationality -->
-        <div>
-            <label for="">Nationality:</label>
-            <input type="text" class="form-control" name="txtnationality" value="<?= $count['nationality'] ?>" placeholder="Enter Nationality" required>
-        </div>
+<section class="contact" id="contact">
 
-        <!-- Sex -->
-        <div>
-            <label for=""><b>Choose Gender:</b></label>
-        </div>
-        <div>
-            <?php if($count['sex']=="Male")
-            {?>
-            <label for="">Male:</label>
-            <input type="radio" name="gender" value="Male" checked>
-            
-            <label for="">Female:</label>
-            <input type="radio" name="gender" value="Female">
-            <label for="">Other:</label>
-            <input type="radio" name="gender" value="Other">
+    <div class="send-message">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="section-heading">
+              <h2>Student's Personal Information Update</h2>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="contact-form">
+              <form id="contact" action="student_update.php" method="POST" enctype="multipart/form-data">
+                <div class="row">
+                <!-- Student ID -->
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                        <label for="">Student ID:</label>
+                        <input type="text" class="form-control"  name="txtstuid" id="" value="<?= $stuid ?>" readonly>
+                    </fieldset>
+                  </div>
+                  
+                <!-- Name For Chinese -->
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                        <label for="">Full Name (Chinese):</label>
+                        <input type="text" class="form-control"  name="txtstuCname" value="<?= $stuCname ?>" >
+                    </fieldset>
+                  </div>
 
-            <?php
-            }
-            ?>
-            <!-- Female -->
-            <?php if($count['sex']=="Female")
-            {?>
-            <label for="">Male:</label>
-            <input type="radio" name="gender" value="Male" >
-            
-            <label for="">Female:</label>
-            <input type="radio" name="gender" value="Female" checked>
-            <label for="">Other:</label>
-            <input type="radio" name="gender" value="Other">
+                <!-- Name For English -->
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                        <label for="">Full Name (English):</label>
+                        <input type="text" class="form-control"  name="txtstuEname" value="<?= $stuEname ?>" required>
+                    </fieldset>
+                  </div>
 
-            <?php
-            }
-            ?>
-            <!-- Other -->
-            <?php if($count['sex']=="Other")
-            {?>
-            <label for="">Male:</label>
-            <input type="radio" name="gender" value="Male" >
-            
-            <label for="">Female:</label>
-            <input type="radio" name="gender" value="Female" >
-            <label for="">Other:</label>
-            <input type="radio" name="gender" value="Other" checked>
-
-            <?php
-            }
-            ?>
-        </div>
-
-        <!-- Marital Status -->
-        <div>
-            <label for=""><b>Choose Marital Status:</b></label>
-        </div>
-        <div>
-            <?php if($count['marital']=="Married")
-            {
-            ?>
-            <label for="">Married:</label>
-            <input type="radio" name="status" value="Married" checked>
-            <label for="">Single:</label>
-            <input type="radio" name="status" value="Single">
-            <?php
-            }
-            ?>
-
-            <?php if($count['marital']=="Single")
-            {?>
-            <label for="">Married:</label>
-            <input type="radio" name="status" value="Married">
-            <label for="">Single:</label>
-            <input type="radio" name="status" value="Single" checked>
-            <?php
-            }
-            ?>
-        </div>
-
-        <!-- D.O.B -->
-        <div>
-            <label for=""><b>Date of Birth</b></label>
-        </div>
-        <div>
-            <input type="date" class="form-control" name="txtdate" value="<?= $count['dob'] ?>" required>
-        </div>
-
-        <!-- Address -->
-        <div>
-            <label for=""><b>Address</b></label>
-        </div>
-        <div>
-            <input type="text" class="form-control" name="txtaddress" value="<?= $count['address'] ?>" placeholder="Enter Address" required>
-        </div>
-
-        <!-- Email -->
-        <div>
-            <label for=""><b>Email Address</b></label>
-        </div>
-        <div>
-            <input type="text" class="form-control" name="txtemail" value="<?= $count['nationality'] ?>" placeholder="example@email.com" required>
-        </div>
-            
-        <!-- Phone Number -->
-        <div>
-            <label for=""><b>Phone Number</b></label>
-        </div>
-        <div>
-            <input type="text" class="form-control" name="txtphno" value="<?= $count['phno'] ?>" placeholder="09*********" required>
-        </div>
-
-        <!-- Legal Guardian -->
-        <div>
-            <label for=""><b>Legal Guardian</b></label>
-        </div>
-        <div>
-            <label for="">Name:</label>
-            <input type="text" class="form-control" name="txtlename" value="<?= $count['lename'] ?>" placeholder="Enter Gurdian Name" required>
-        </div>
-        <div> 
-            <label for="">Relationship</label>
-            <input type="text" class="form-control" name="txtlerelation" value="<?= $count['lerelation'] ?>" placeholder="Enter Gurdian Name" required>
-        </div>
-        <div> 
-            <label for="">Address:</label>
-            <input type="text" class="form-control" name="txtleaddress" value="<?= $count['leaddress'] ?>" placeholder="Enter Address" required>
-        </div>
-        <div> 
-            <label for="">Telephone No</label>
-            <input type="text" class="form-control" name="txtlephno" value="<?= $count['lephno'] ?>" placeholder="09*********" required>
-        </div>
-
-        <!-- Contact Person in Taiwan -->
-        <div>
-            <label for=""><b>Contact Person in Taiwan </b></label>
-        </div>
-        <div>
-            <label for="">Name:</label>
-            <input type="text" class="form-control" name="txtctname" value="<?= $count['ctname'] ?>" placeholder="Enter Gurdian Name" required>
-        </div>
-        <div> 
-            <label for="">Relationship</label>
-            <input type="text" class="form-control" name="txtctrelation" value="<?= $count['ctrelation'] ?>" placeholder="Enter Gurdian Name" required>
-        </div>
-        <div> 
-            <label for="">Address:</label>
-            <input type="text" class="form-control" name="txtctaddress" value="<?= $count['ctaddress'] ?>" placeholder="Enter Address" required>
-        </div>
-        <div> 
-            <label for="">Telephone No</label>
-            <input type="text" class="form-control" name="txtctphno" value="<?= $count['ctphno'] ?>" placeholder="09*********" required>
-        </div>
-        
-        <!-- Citizenship -->
-        <div>
-            <!-- Yes -->
-            <?php if($count['roc']=="Yes")
-            {?>
-            <label for="">Used to be a citizen of R.O.C or not?:</label>
-            <label for="">Yes</label>
-            <input type="radio" name="rdo" value="Yes" checked>
-            <label for="">No</label>
-            <input type="radio" name="rdo" value="No">
-            <?php
-            }
-            ?>
-
-            <!-- No -->
-            <?php if($count['roc']=="No")
-            {?>
-            <label for="">Used to be a citizen of R.O.C or not?:</label>
-            <label for="">Yes</label>
-            <input type="radio" name="rdo" value="Yes">
-            <label for="">No</label>
-            <input type="radio" name="rdo" value="No" checked>
-            <?php
-            }
-            ?>
-        </div>
+                <!-- Passport No -->
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                        <label for="">Passport No:</label>
+                        <input type="text" class="form-control"  name="txtpassno" value="<?= $passno ?>" required>
+                    </fieldset>
+                  </div>
                 
-        <!-- Button -->
-        <div>
-            <input class="btn btn-info" type="submit" name="btnupdate" value="Update">
-            <input class="btn btn-danger" type="reset" name="btncancel" value="Cancel" onclick="location.href='student_data.php' ">
-        </div>
-    </form>
+                <!-- Nationality -->
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                        <label for="">Nationality:</label>
+                        <input type="text" class="form-control"  name="txtnationality" value="<?= $nationality ?>" required>
+                    </fieldset>
+                </div>
+
+                <!-- Sex -->
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                        <label for="" class="">Choose Gender:</label>
+                        <select name="gender" class="form-control" required>
+                            <option value="<?= $sex ?>"><?= $sex ?></option>
+                            <option value="">Choose Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </fieldset>
+                  </div>
+
+                <!-- Marital Status -->
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                      <br>
+                        <label for="" class="">Choose Marital Status:</label>
+                        <select name="status" class="form-control" required>
+                            <option value="<?= $marital ?>"><?= $marital ?></option>
+                            <option value="">Choose Marital Status</option>
+                            <option value="Single">Single</option>
+                            <option value="Married">Married</option>
+                        </select>
+                    </fieldset>
+                  </div>
+            
+                <!-- D.O.B -->
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                        <br>
+                        <label for="">Date of Birth:</label>
+                        <input type="date" class="form-control" name="txtdate" value="<?= $dob ?>" required>
+                    </fieldset>
+                </div>
+
+                <!-- Address -->
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                        <label for="">Address</label>
+                        <input type="text" class="form-control" name="txtaddress" value="<?= $address ?>" placeholder="Enter Address" required>
+                    </fieldset>
+                </div>
+
+                <!-- Email -->
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                        <label for="">Email Address</label>
+                        <input type="text" class="form-control" name="txtemail" value="<?= $email ?>" required>
+                    </fieldset>
+                </div>
+
+                <!-- Phone Number -->
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                        <label for="">Phone Number</label>
+                        <input type="text" class="form-control" name="txtphno" value="<?= $phno ?>" required>
+                    </fieldset>
+                </div>
+
+                <!-- Legal Guardian -->
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                        <h4>Legal Guardian:</h4>
+                        <br>
+                        <label for="">Name:</label>
+                        <input type="text" class="form-control" name="txtlename" value="<?= $lename ?>" placeholder="Enter Gurdian Name" required>
+                    </fieldset>
+                </div>
+
+                <!-- Legal Guardian's Relationship -->
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                        <label for="">Relationship</label>
+                        <input type="text" class="form-control" name="txtlerelation" value="<?= $lerelation ?>"  required>
+                    </fieldset>
+                </div>
+
+                <!-- Legal Guardian's Address -->
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                        <label for="">Address:</label>
+                        <input type="text" class="form-control" name="txtleaddress" value="<?= $leaddress ?>" required>
+                    </fieldset>
+                </div>
+
+                <!-- Legal Guardian's Telephone No -->
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                        <label for="">Telephone No</label>
+                        <input type="text" class="form-control" name="txtlephno" value="<?= $lephno ?>" placeholder="09*********" required>
+                    </fieldset>
+                </div>
+
+                <!--  -->
+                <!-- Contact Person In Taiwan -->
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                        <h4>Contact Person in Taiwan:</h4>
+                        <br>
+                        <label for="">Name:</label>
+                        <input type="text" class="form-control" name="txtctname" value="<?= $ctname ?>" required>
+                    </fieldset>
+                </div>
+
+                <!-- Contact Person's Relationship -->
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                        <label for="">Relationship</label>
+                        <input type="text" class="form-control" name="txtctrelation" value="<?= $ctrelation ?>" required>
+                    </fieldset>
+                </div>
+
+                <!-- Contact Person's Address -->
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                        <label for="">Address:</label>
+                        <input type="text" class="form-control" name="txtctaddress" value="<?= $ctaddress ?>" required>
+                    </fieldset>
+                </div>
+
+                <!-- Contact Person's Telephone No -->
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                        <label for="">Telephone No</label>
+                        <input type="text" class="form-control" name="txtctphno" value="<?= $ctphno ?>" required>
+                    </fieldset>
+                </div>
+
+                <!-- Citizenship or Not? -->
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                        <label for="" class="">Used to be a Citizen of R.O.C or not?:</label>
+                        <select name="rdo" class="form-control" required>
+                            <option value="<?= $roc ?>"><?= $roc ?></option>
+                            <option value="">Choose Yes or No?</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </fieldset>
+                  </div>
+                
+                <!-- Button -->
+                  <div class="col-lg-12">
+                    <fieldset>
+                        <button type="text" name="txtstudentid" value="<?php echo $_SESSION['sid']; ?>" hidden></button>
+                        <br>
+                        <button class="btn btn-info" type="submit" name="btnupdate" value="Update">Update</button>
+                        <button class="btn btn-danger" type="reset" name="btncancel" value="Cancel" onclick="location.href='update_all.php' ">Cancel</button>
+                    </fieldset>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+
+  
+</form>
+
+</section>
+
+<!-- form section ends -->
+
+
 </body>
 </html>
+
+<?php
+    include('footer.php');
+?>

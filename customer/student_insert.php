@@ -4,6 +4,112 @@
     include('autoid_functions.php');
     include('header_form.php');
 
+    // --- check if the data are already filled or not ---  //
+    if (isset($_SESSION['sid']))
+    {
+        $sid=$_SESSION['sid'];
+
+        $query= "SELECT * FROM stu 
+                 WHERE stuid != '' 
+                 AND eid != '' 
+                 AND pid != '' 
+                 AND cid != '' 
+                 AND slid != '' 
+                 AND did != '' 
+                 AND sid ='$sid' ";
+        $sql=mysqli_query($connection, $query);
+        $rows=mysqli_fetch_array($sql);
+
+        if($rows)
+        {
+          echo "<script>window.alert('Information Already Exists')</script>";
+          echo "<script>window.location='update_all.php'</script>";
+        }
+      }
+
+      // Check if the student's personal information is null or not
+      if (isset($_SESSION['sid']))
+      {
+        $sid=$_SESSION['sid'];
+
+        $stuquery= "SELECT * FROM stu WHERE stuid != '' AND sid ='$sid' ";
+        $stusql=mysqli_query($connection, $stuquery);
+        $sturows=mysqli_fetch_array($stusql);
+
+        if($sturows)
+        {
+          echo "<script>window.alert('Student Personal Information Already Filled')</script>";
+          echo "<script>window.location='eduback_insert.php'</script>";
+        }
+      }
+
+      // Check if the student's education background is null or not
+      if (isset($_SESSION['sid']))
+      {
+        $sid=$_SESSION['sid'];
+
+        $eduquery= "SELECT * FROM stu WHERE eid != '' AND sid ='$sid' ";
+        $edusql=mysqli_query($connection, $eduquery);
+        $edurows=mysqli_fetch_array($edusql);
+
+        if($edurows)
+        {
+          echo "<script>window.alert('Education Background Information Already Filled')</script>";
+          echo "<script>window.location='chinesepro.php'</script>";
+        }
+      }
+
+
+      // Check if the student's chinese proficiency is null or not
+      if (isset($_SESSION['sid']))
+      {
+        $sid=$_SESSION['sid'];
+
+        $cquery= "SELECT * FROM stu WHERE cid != '' AND sid ='$sid' ";
+        $csql=mysqli_query($connection, $cquery);
+        $crows=mysqli_fetch_array($csql);
+
+        if($crows)
+        {
+          echo "<script>window.alert('Chinese Proficiency Information Already Filled')</script>";
+          echo "<script>window.location='program_insert.php'</script>";
+        }
+      }
+
+
+      // Check if the student's choosing program is null or not
+      if (isset($_SESSION['sid']))
+      {
+        $sid=$_SESSION['sid'];
+
+        $pquery= "SELECT * FROM stu WHERE pid != '' AND sid ='$sid' ";
+        $psql=mysqli_query($connection, $pquery);
+        $prows=mysqli_fetch_array($psql);
+
+        if($prows)
+        {
+          echo "<script>window.alert('Enrollment Program Information Already Filled')</script>";
+          echo "<script>window.location='scholar_insert.php'</script>";
+        }
+      }
+
+      // Check if the student's scholarship and financial statement is null or not
+      if (isset($_SESSION['sid']))
+      {
+        $sid=$_SESSION['sid'];
+
+        $slquery= "SELECT * FROM stu WHERE slid != '' AND sid ='$sid' ";
+        $slsql=mysqli_query($connection, $slquery);
+        $slrows=mysqli_fetch_array($slsql);
+
+        if($slrows)
+        {
+          echo "<script>window.alert('Student's Scholarship and Financial Statement Already Filled')</script>";
+          echo "<script>window.location='docsubmit_insert.php'</script>";
+        }
+      }
+
+
     if(isset($_POST['btnsave']))
     {
         $txtstuid=$_POST['txtstuid'];
@@ -28,29 +134,13 @@
         $rdo=$_POST['rdo'];
         $studentid=$_POST['txtstudentid'];
 
-        // $txtcuspassword=md5($_POST['txtcuspassword']);
-
-
-        //  --- Check Duplicate Email --- //
-        $checkemail="SELECT * FROM student
-                     WHERE email='$txtemail' ";
-        $query=mysqli_query($connection,$checkemail);
-        $count=mysqli_num_rows($query);
-
-        if($count!=0)
-        {
-            echo "<script>window.alert('Email Already Exists')</script>";
-            echo "<script>window.location='customer_insert.php'</script>";
-            exit();
-        }
-
         // --- Insert Data --- //
         $insert="INSERT INTO student(stuid, stuCname, stuEname, passno, nationality, sex, marital, dob, address, email, phno, lename, lerelation, leaddress, lephno, ctname, ctrelation, ctaddress, ctphno, roc)
                  VALUES ('$txtstuid', '$txtstuCname', '$txtstuEname', '$txtpassno', '$txtnationality', '$gender', '$status', '$txtdate', '$txtaddress', '$txtemail', '$txtphno', '$txtlename', '$txtlerelation', '$txtleaddress', '$txtlephno', '$txtctname', '$txtctrelation', '$txtctaddress', '$txtctphno', '$rdo')";
         
-        $query=mysqli_query($connection,$insert);
+        $insertquery=mysqli_query($connection,$insert);
 
-        if($query)
+        if($insertquery)
         {
             $updatesql="UPDATE stu SET stuid='$txtstuid' WHERE sid='$studentid' ";
             $updatedata=mysqli_query($connection,$updatesql);
@@ -294,7 +384,7 @@
                 <!-- Button -->
                   <div class="col-lg-12">
                     <fieldset>
-                        <button type="text" name="txtstudentid" value="<?php echo $_SESSION['sid']; ?>" hidden></button>
+                        <input type="text" name="txtstudentid" value="<?php echo $_SESSION['sid']; ?>" hidden>
                         <br>
                         <button class="btn btn-primary" type="submit" name="btnsave" value="Save">Save</button>
                         <button class="btn btn-danger" type="reset" name="btncancel" value="Clear" >Clear</button>

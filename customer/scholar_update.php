@@ -1,20 +1,33 @@
 <?php
     
+    session_start();
     include('connect.php');
     include('autoid_functions.php');
-    include('../admin/teacher_header.php');
+    include('header_form.php');
 
-    if(isset($_REQUEST['slid']))
+     if (isset($_SESSION['sid']))
     {
-        $data=$_REQUEST['slid'];
+        $sid=$_SESSION['sid'];
 
-        $sql="SELECT * FROM scholar
-              WHERE slid='$data'  ";
-        
-        $query=mysqli_query($connection,$sql);
-        $count=mysqli_fetch_array($query);
-        
+        $query= "SELECT * FROM stu s, student st, eduback edu, c_language c, program p, scholar sc, doc_submit d
+              WHERE s.stuid = st.stuid
+              AND s.eid = edu.eid
+              AND s.pid = p.pid
+              AND s.cid = c.cid
+              AND s.slid = sc.slid
+              AND s.did = d.did
+              AND s.sid ='$sid'";
+        $sql=mysqli_query($connection, $query);
+        $rows=mysqli_fetch_array($sql);
 
+        $slid=$rows['slid'];
+        $pmoney=$rows['pmoney'];
+        $fmoney=$rows['fmoney'];
+        $smoney=$rows['smoney'];
+        $schscholar=$rows['schscholar'];
+        $health_condi=$rows['health_condi'];
+        $health_problem=$rows['health_problem'];
+        $scholar_apply=$rows['scholar_apply'];
     }
 
     if(isset($_POST['btnupdate']))
@@ -27,7 +40,8 @@
         $cbohealth=$_POST['cbohealth'];
         $txthpbl=$_POST['txthpbl'];
         $cbowas=$_POST['cbowas'];
-
+        // student id
+        $studentid=$_POST['txtstudentid'];
 
         $update="UPDATE scholar
                  SET pmoney='$cbopmoney',
@@ -38,11 +52,11 @@
                      health_problem='$txthpbl',
                      scholar_apply='$cbowas'
                  WHERE slid='$txtslid' ";
-        $query=mysqli_query($connection,$update);
-        if($query)
+        $slquery=mysqli_query($connection,$update);
+        if($slquery)
         {
             echo "<script>window.alert('Financial Information and Scholar Information are Updated')</script>";
-            echo "<script>window.location='scholar_data.php'</script>";
+            echo "<script>window.location='update_all.php'</script>";
         }
         else{
             echo "<p>Something Went Wrong in Financial Information and Scholar Information Update".mysqli_error($connection)."</p>";
@@ -53,197 +67,189 @@
 
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Financial Information and Scholar Information Update</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
-    <link rel="stylesheet" href="../admin/css/style.css"> 
+    <title>Scholar Update Form</title>
 </head>
 <body>
 
-    <form action="scholar_update.php" method="POST" enctype="multiplepart/form-data">
-<legend>Update Information about Scholarship Information and Financial Statement</legend>
+<!-- form section starts  -->
 
-    <label for="">1. Please State Your Source of Financial Support while furthering your Education in the Republic of China (Taiwan)</label>
+<section class="contact" id="contact">
 
-    <div>
-            <label for=""><b>Choose and Fill Program</b></label>
-        </div>
-            <!-- Scholar ID -->
-        <div>
-            <label for="">Scholar ID:</label>
-            <input class="form-control" type="text" name="txtslid" value="<?= $count['slid'] ?>" readonly>
-        </div> 
+    <div class="send-message">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="section-heading">
+              <h2>Scholarship Information and Financial Statement Update Form</h2>
+               <label for="">Please State Your Source of Financial Support while furthering your Education in the Republic of China (Taiwan)</label>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="contact-form">
+              <form id="contact" action="scholar_update.php" method="POST" enctype="multipart/form-data">
+                <!-- Scholar ID -->
+                <div class="row">
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                        <label for="">Scholar ID:</label>
+                        <input class="form-control" type="text" name="txtslid" value="<?= $slid ?>" readonly>
+                    </fieldset>
+                  </div>
 
-            <!-- Personal Saving Money -->
-        <div class="">
-            <label for="" class="">Choose Your Personal Saving Amount</label>
-            <select name="cbopmoney" class="custom-select">
-                <option value="<?= $count['pmoney'] ?>"><?= $count['pmoney'] ?></option>
-                <option value="">Choose Money Amount</option>
-                <option value="US$0 - US$99">US$0 - US$99</option>
-                <option value="US$100 - US$1000">US$100 - US$1000</option>
-                <option value="US$1100 - US$2000">US$1100 - US$2000</option>
-                <option value="US$2100 - US$3000">US$2100 - US$3000</option>
-                <option value="US$3100 - US$4000">US$3100 - US$4000</option>
-                <option value="US$4100 - US$5000">US$4100 - US$5000</option>
-                <option value="US$5100 - US$6000">US$5100 - US$6000</option>
-                <option value="US$6100 - US$7000">US$6100 - US$7000</option>
-                <option value="US$7100 - US$8000">US$7100 - US$8000</option>
-                <option value="US$8100 - US$9000">US$8100 - US$9000</option>
-                <option value="US$9100 - US$10000">US$9100 - US$10000</option>
-            </select>
-        </div>
+                  <!-- Personal Saving Amount -->
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                        <label for="" class="">Choose Your Personal Saving Amount: </label>
+                        <select name="cbopmoney" class="form-control">
+                            <option value="<?= $pmoney ?>"><?= $pmoney ?></option>
+                            <option value="">Choose Money Amount</option>
+                            <option value="US$0 - US$99">US$0 - US$99</option>
+                            <option value="US$100 - US$1000">US$100 - US$1000</option>
+                            <option value="US$1100 - US$2000">US$1100 - US$2000</option>
+                            <option value="US$2100 - US$3000">US$2100 - US$3000</option>
+                            <option value="US$3100 - US$4000">US$3100 - US$4000</option>
+                            <option value="US$4100 - US$5000">US$4100 - US$5000</option>
+                            <option value="US$5100 - US$6000">US$5100 - US$6000</option>
+                            <option value="US$6100 - US$7000">US$6100 - US$7000</option>
+                            <option value="US$7100 - US$8000">US$7100 - US$8000</option>
+                            <option value="US$8100 - US$9000">US$8100 - US$9000</option>
+                            <option value="US$9100 - US$10000">US$9100 - US$10000</option>
+                        </select>
+                    </fieldset>
+                  </div>
+                  
+                  <!-- Saving Money From Parents -->
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                      <br>
+                        <label for="" class="">Choose Your Saving Money From Parents: </label>
+                        <select name="cbofmoney" class="form-control">
+                            <option value="<?= $fmoney ?>"><?= $fmoney ?></option>
+                            <option value="">Choose Money Amount</option>
+                            <option value="US$0 - US$99">US$0 - US$99</option>
+                            <option value="US$100 - US$1000">US$100 - US$1000</option>
+                            <option value="US$1100 - US$2000">US$1100 - US$2000</option>
+                            <option value="US$2100 - US$3000">US$2100 - US$3000</option>
+                            <option value="US$3100 - US$4000">US$3100 - US$4000</option>
+                            <option value="US$4100 - US$5000">US$4100 - US$5000</option>
+                            <option value="US$5100 - US$6000">US$5100 - US$6000</option>
+                            <option value="US$6100 - US$7000">US$6100 - US$7000</option>
+                            <option value="US$7100 - US$8000">US$7100 - US$8000</option>
+                            <option value="US$8100 - US$9000">US$8100 - US$9000</option>
+                            <option value="US$9100 - US$10000">US$9100 - US$10000</option>
+                        </select>
+                    </fieldset>
+                  </div>
+
+                  <!-- Scholarships Amount  -->
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                      <br>
+                        <label for="" class="">Choose Your Scholarship Amount </label>
+                        <select name="cbosmoney" class="form-control">
+                            <option value="<?= $smoney ?>"><?= $smoney ?></option>
+                            <option value="">Choose Money Amount</option>
+                            <option value="US$0 - US$99">US$0 - US$99</option>
+                            <option value="US$100 - US$1000">US$100 - US$1000</option>
+                            <option value="US$1100 - US$2000">US$1100 - US$2000</option>
+                            <option value="US$2100 - US$3000">US$2100 - US$3000</option>
+                            <option value="US$3100 - US$4000">US$3100 - US$4000</option>
+                            <option value="US$4100 - US$5000">US$4100 - US$5000</option>
+                            <option value="US$5100 - US$6000">US$5100 - US$6000</option>
+                            <option value="US$6100 - US$7000">US$6100 - US$7000</option>
+                            <option value="US$7100 - US$8000">US$7100 - US$8000</option>
+                            <option value="US$8100 - US$9000">US$8100 - US$9000</option>
+                            <option value="US$9100 - US$10000">US$9100 - US$10000</option>
+                        </select>
+                    </fieldset>
+                  </div>
+
+                  <!-- Choose Scholarship Department or Organization -->
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                      <br>
+                        <label for="" class="">Choose Scholarship Department or Organization</label>
+                        <select name="cboorg" class="form-control">
+                            <option value="<?= $schscholar ?>"><?= $schscholar ?></option>
+                            <option value="">Choose Organization</option>
+                            <option value="MOE (Ministry of Education)">MOE (Ministry of Education)</option>
+                            <option value="MOFA (Ministry of Foreign Affairs)">MOFA (Ministry of Foreign Affairs)</option>
+                            <option value="TaiwanICDF (International Higher Education Scholarship Programs of TaiwanlCDF)">TaiwanICDF (International Higher Education Scholarship Programs of TaiwanlCDF)</option>
+                            <option value="From School">From School</option>
+                        </select>
+                    </fieldset>
+                  </div>
+
+                 <!-- Health Condition -->
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                      <br>
+                      <label for="" class="">Choose Your Health Condition</label>
+                      <select name="cbohealth" class="form-control">
+                            <option value="<?= $health_condi ?>"><?= $health_condi ?></option>
+                            <option value="">Choose Your Health Condition</option>
+                            <option value="Good">Good</option>
+                            <option value="Average">Average</option>
+                            <option value="Poor">Poor</option>
+                        </select>
+                    </fieldset>
+                  </div>
+                  
+
+                 <!-- Describe Any Health Problem -->
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                      <br>
+                        <label for="" class="">Describe any Defect or Health Problem You Have</label>
+                        <input type="text" name="txthpbl" class="form-control" placeholder="Enter Your Health Problem" value="<?= $health_problem ?>">
+                    </fieldset>
+                  </div>
+                
+                <!-- Want to Apply Scholarship? -->
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                        <label for="" class="">Do You Want to Apply Scholarship?</label>
+                        <select name="cbowas" class="form-control" required>
+                            <option value="<?= $scholar_apply ?>"><?= $scholar_apply ?></option>
+                            <option value="">Choose Want to Apply Scholarship or Not</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </fieldset>
+                  </div>
+     
+                <!-- Button -->
+                  <div class="col-lg-12">
+                    <fieldset>
+                        <input type="text" name="txtstudentid" value="<?php echo $_SESSION['sid']; ?>" hidden>
+                        <br>
+                        <button class="btn btn-primary" type="submit" name="btnupdate" value="Update">Update</button>
+                        <button class="btn btn-danger" type="reset" name="btncancel" value="Cancel" onclick="location.href='update_all.php' ">Cancel</button>
+                    </fieldset>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+
+  
+</form>
+
+</section>
+
+<!-- form section ends -->
 
 
-           <!-- Saving Money From Parents -->
-        <div class="">
-            <label for="" class="">Choose Your Saving Money From Parents </label>
-            <select name="cbofmoney" class="custom-select">
-                <option value="<?= $count['fmoney'] ?>"><?= $count['fmoney'] ?></option>
-                <option value="">Choose Money Amount</option>
-                <option value="US$0 - US$99">US$0 - US$99</option>
-                <option value="US$100 - US$1000">US$100 - US$1000</option>
-                <option value="US$1100 - US$2000">US$1100 - US$2000</option>
-                <option value="US$2100 - US$3000">US$2100 - US$3000</option>
-                <option value="US$3100 - US$4000">US$3100 - US$4000</option>
-                <option value="US$4100 - US$5000">US$4100 - US$5000</option>
-                <option value="US$5100 - US$6000">US$5100 - US$6000</option>
-                <option value="US$6100 - US$7000">US$6100 - US$7000</option>
-                <option value="US$7100 - US$8000">US$7100 - US$8000</option>
-                <option value="US$8100 - US$9000">US$8100 - US$9000</option>
-                <option value="US$9100 - US$10000">US$9100 - US$10000</option>
-            </select>
-        </div>
-
-
-           <!-- Scholarships Amount -->
-        <div class="">
-            <label for="" class="">Choose Your Scholarship Amount </label>
-            <select name="cbosmoney" class="custom-select">
-                <option value="<?= $count['smoney'] ?>"><?= $count['smoney'] ?></option>
-                <option value="">Choose Money Amount</option>
-                <option value="US$0 - US$99">US$0 - US$99</option>
-                <option value="US$100 - US$1000">US$100 - US$1000</option>
-                <option value="US$1100 - US$2000">US$1100 - US$2000</option>
-                <option value="US$2100 - US$3000">US$2100 - US$3000</option>
-                <option value="US$3100 - US$4000">US$3100 - US$4000</option>
-                <option value="US$4100 - US$5000">US$4100 - US$5000</option>
-                <option value="US$5100 - US$6000">US$5100 - US$6000</option>
-                <option value="US$6100 - US$7000">US$6100 - US$7000</option>
-                <option value="US$7100 - US$8000">US$7100 - US$8000</option>
-                <option value="US$8100 - US$9000">US$8100 - US$9000</option>
-                <option value="US$9100 - US$10000">US$9100 - US$10000</option>
-            </select>
-        </div>
-
-
-        <!-- Choose Scholarship Department or Organization -->
-        <div class="">
-            <label for="" class="">Choose Scholarship Department or Organization</label>
-            <select name="cboorg" class="custom-select">
-                <option value="<?= $count['schscholar'] ?>"><?= $count['schscholar'] ?></option>
-                <option value="">Choose Organization</option>
-                <option value="MOE (Ministry of Education)">MOE (Ministry of Education)</option>
-                <option value="MOFA (Ministry of Foreign Affairs)">MOFA (Ministry of Foreign Affairs)</option>
-                <option value="TaiwanICDF (International Higher Education Scholarship Programs of TaiwanlCDF)">TaiwanICDF (International Higher Education Scholarship Programs of TaiwanlCDF)</option>
-                <option value="From School">From School</option>
-            </select>
-        </div>
-
-
-        <!-- Health Condition-->
-        <div class="">
-            <label for="" class="">Choose Your Health Condition</label>
-            <br>
-             <?php if($count['health_condi']=="Good")
-            {?>
-            <label for="">Good:</label>
-            <input type="radio" name="rdoh" value="Good" checked>
-            
-            <label for="">Average:</label>
-            <input type="radio" name="rdoh" value="Average">
-            <label for="">Poor:</label>
-            <input type="radio" name="rdoh" value="Poor">
-
-            <?php
-            }
-            ?>
-            <!-- Average -->
-            <?php if($count['health_condi']=="Average")
-            {?>
-            <label for="">Good:</label>
-            <input type="radio" name="rdoh" value="Good" >
-            
-            <label for="">Average:</label>
-            <input type="radio" name="rdoh" value="Average" checked>
-            <label for="">Poor:</label>
-            <input type="radio" name="rdoh" value="Poor">
-
-            <?php
-            }
-            ?>
-            <!-- Poor -->
-            <?php if($count['health_condi']=="Poor")
-            {?>
-            <label for="">Good:</label>
-            <input type="radio" name="rdoh" value="Good">
-            
-            <label for="">Average:</label>
-            <input type="radio" name="rdoh" value="Average">
-            <label for="">Poor:</label>
-            <input type="radio" name="rdoh" value="Poor" checked>
-
-            <?php
-            }
-            ?>
-        </div>
-
-        <!-- Health Problem -->
-        <div class="">
-            <label for="" class="">Describe any Defect or Health Problem You Have</label>
-            <input type="text" class="form-control" name="txthpbl" value="<?= $count['health_problem'] ?>" placeholder="Enter Your Health Problem">
-        </div>
-
-        <!-- Want to Apply Scholarship? -->
-        <div class="">
-            <label for="" class="">Do You Want to Apply Scholarship?</label>
-           <?php if($count['scholar_apply']=="Yes")
-            {?>
-            <label for="">Yes:</label>
-            <input type="radio" name="cbowas" value="Yes" checked>
-            
-            <label for="">No:</label>
-            <input type="radio" name="cbowas" value="No">
-            <?php
-            }
-            ?>
-            <!-- No -->
-             <?php if($count['scholar_apply']=="No")
-            {?>
-            <label for="">No:</label>
-            <input type="radio" name="cbowas" value="No" checked>
-            
-            <label for="">Yes:</label>
-            <input type="radio" name="cbowas" value="Yes">
-            <?php
-            }
-            ?>
-        
-            
-        </div>
-       
-        <!-- Button -->
-       <div>
-            <input class="btn btn-info" type="submit" name="btnupdate" value="Update">
-            <input class="btn btn-danger" type="reset" name="btncancel" value="Cancel" onclick="location.href='scholar_data.php' " >
-        </div>
-    </form>
 </body>
 </html>
 
-
+<?php
+    include('footer.php');
+?>
