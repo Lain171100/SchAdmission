@@ -40,10 +40,8 @@
         $ctaddress=$rows['ctaddress'];
         $ctphno=$rows['ctphno'];
         $roc=$rows['roc'];    
-
-        
+ 
     }
-
 
     if(isset($_POST['btnupdate']))
     {
@@ -97,7 +95,7 @@
 
         if($updatequery)
         {
-            echo "<script>window.alert('Student's Data Update Successfully')</script>
+            echo "<script>window.alert('Student's Information Data Update Successfully')</script>
             <script>window.location='update_all.php'</script>";
         }
         else{
@@ -139,8 +137,8 @@
                 <!-- Student ID -->
                   <div class="col-lg-12 col-md-12 col-sm-12">
                     <fieldset>
-                        <label for="">Student ID:</label>
-                        <input type="text" class="form-control"  name="txtstuid" id="" value="<?= $stuid ?>" readonly>
+                        <!-- <label for="">Student ID:</label> -->
+                        <input type="text" class="form-control"  name="txtstuid" id="" value="<?= $stuid ?>" hidden>
                     </fieldset>
                   </div>
                   

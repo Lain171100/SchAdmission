@@ -1,11 +1,11 @@
-<?php
-    session_start();
-    include('header.php');
-    include('connect.php');
+<?php    
+  session_start();
+  include('header.php');
+  include('connect.php');
     
 
-    // If the students login failed for 3 times, login timer will appear.
-    if (isset($_SESSION['count'])) 
+  // If the students login failed for 3 times, login timer will appear.
+  if (isset($_SESSION['count'])) 
 	{
 		$count=$_SESSION['count'];
 		if ($count==3) 
@@ -17,46 +17,42 @@
 
     if(isset($_POST['btnlogin']))
     {
-        $txtsemail=$_POST['txtsemail'];
-        $txtspassword=md5($_POST['txtspassword']);
-        $txtsid=$_SESSION['txtsid'];
+      $txtsemail=$_POST['txtsemail'];
+      $txtspassword=md5($_POST['txtspassword']);
+      $txtsid=$_SESSION['txtsid'];
 
-        $sql="SELECT * FROM stu
-              WHERE semail='$txtsemail'
-              AND spassw='$txtspassword'
-            --   AND customerid='$txtcid'
-              ";
+      $sql="SELECT * FROM stu
+            WHERE semail='$txtsemail'
+            AND spassw='$txtspassword' ";
 
-        $query=mysqli_query($connection,$sql);
-        $count=mysqli_num_rows($query);
-        $arr=mysqli_fetch_array($query);
+      $query=mysqli_query($connection,$sql);
+      $count=mysqli_num_rows($query);
+      $arr=mysqli_fetch_array($query);
 
-        if($count==0)
-        {   
-            if (isset($_SESSION['count'])) 
+      if($count==0)
+      {   
+        if (isset($_SESSION['count'])) 
 					
-				{
-					$_SESSION['count']++;
-
+			{
+				$_SESSION['count']++;
 					
-				}
-				else
-				{
-					$_SESSION['count']=1;
-                }
+			}
+			else
+			{
+				$_SESSION['count']=1;
+      }
             
-            echo "<script>window.alert('Email or Password is Incorrect.')</script>";
-            echo "<script>window.location='student_login.php'</script>";
-        }
-        else
-        {   
-            $_SESSION['sid']=$arr['sid'];
-            $_SESSION['sname']=$arr['sname'];
+        echo "<script>window.alert('Email or Password is Incorrect.')</script>";
+        echo "<script>window.location='student_login.php'</script>";
+      }
+      else
+      {   
+        $_SESSION['sid']=$arr['sid'];
+        $_SESSION['sname']=$arr['sname'];
 
-
-            echo "<script>alert('Login Successfully')</script>";
-            echo "<script>window.location='student_insert.php'</script>";
-        }
+        echo "<script>alert('Login Successfully')</script>";
+        echo "<script>window.location='student_insert.php'</script>";
+      }
     }
 ?>
 
@@ -65,7 +61,7 @@
 <head>
 <meta charset="UTF-8">    
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Log In</title>
+    <title>Student Log In</title>
 </head>
 <body>
     

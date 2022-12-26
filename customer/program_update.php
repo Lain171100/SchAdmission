@@ -95,8 +95,8 @@
                 <div class="row">
                   <div class="col-lg-12 col-md-12 col-sm-12">
                     <fieldset>
-                        <label for="">Program ID:</label>
-                        <input class="form-control" type="text" name="txtpid" value="<?= $pid ?>" readonly>
+                        <!-- <label for="">Program ID:</label> -->
+                        <input class="form-control" type="text" name="txtpid" value="<?= $pid ?>" hidden>
                     </fieldset>
                   </div>
 

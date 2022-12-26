@@ -49,7 +49,7 @@
                      if ($stafftype=="Staff")
                     {
                     ?>
-                    <th scope="col">Actions</th>
+                    <!-- <th scope="col">Actions</th> -->
                     <?php
                     }
                     ?>
@@ -86,10 +86,10 @@
 
                         if ($stafftype=="Staff")
                         {
-                        echo "<td>
-                                <a href='program_update.php?pid=$pid' class='btn btn-outline-info'>Update</a> <br> <br>                              
-                                <a href='program_delete.php?pid=$pid' class='btn btn-outline-danger'>Delete</a>
-                              </td>";
+                        // echo "<td>
+                        //         <a href='program_update.php?pid=$pid' class='btn btn-outline-info'>Update</a> <br> <br>                              
+                        //         <a href='program_delete.php?pid=$pid' class='btn btn-outline-danger'>Delete</a>
+                        //       </td>";
                         }
                         echo "</tr>";
                     }

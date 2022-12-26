@@ -360,8 +360,8 @@
         <legend>Document Submission Form</legend>
 
         <div>
-            <label for="did">Doc Submit ID:</label>
-            <input type="text" class="form-control" name="txtdid" value="<?= AutoID('doc_submit','did','DID-',4) ?>" readonly>
+            <!-- <label for="did">Doc Submit ID:</label> -->
+            <input type="text" class="form-control" name="txtdid" value="<?= AutoID('doc_submit','did','DID-',4) ?>" hidden>
             <br>
          </div>
 

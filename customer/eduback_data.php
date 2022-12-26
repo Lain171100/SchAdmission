@@ -61,7 +61,7 @@
                      if ($stafftype=="Staff")
                     {
                     ?>
-                    <th scope="col">Actions</th>
+                    <!-- <th scope="col">Actions</th> -->
                     <?php
                     }
                     ?>
@@ -150,11 +150,12 @@
 
                         if ($stafftype=="Staff")
                         {
-                        echo "<td>
-                                <a href='eduback_update.php?eid=$eid' class='btn btn-outline-info'>Update</a> <br> <br>                              
-                                <a href='eduback_delete.php?eid=$eid' class='btn btn-outline-danger'>Delete</a>
-                              </td>";
+                        
                         }
+                        // echo "<td>
+                            //     <a href='eduback_update.php?eid=$eid' class='btn btn-outline-info'>Update</a> <br> <br>                              
+                            //     <a href='eduback_delete.php?eid=$eid' class='btn btn-outline-danger'>Delete</a>
+                            //   </td>";
                         echo "</tr>";
                     }
                 ?>

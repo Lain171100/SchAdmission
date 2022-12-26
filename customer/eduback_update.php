@@ -173,7 +173,7 @@
                 <div class="row">
                   <div class="col-lg-12 col-md-12 col-sm-12">
                     <fieldset>
-                        <label for="" hidden>Educational Background ID</label>
+                        <!-- <label for="" hidden>Educational Background ID</label> -->
                         <input type="text" class="form-control" name="txteid" id="" value="<?= $eid ?>" hidden>
                     </fieldset>
                   </div>
@@ -301,7 +301,7 @@
                   <div class="col-lg-12">
                     <fieldset>
                         <input type="text" name="txtstudentid" value="<?php echo $_SESSION['sid']; ?>" hidden>
-                        <button class="btn btn-primary" type="submit" name="btnupdate" value="Update">Update</button>
+                        <button class="btn btn-info" type="submit" name="btnupdate" value="Update">Update</button>
                         <button class="btn btn-danger" type="reset" name="btncancel" value="Cancel" onclick="location.href='update_all.php' ">Cancel</button>
                     </fieldset>
                   </div>

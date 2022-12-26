@@ -72,7 +72,7 @@
                 <div class="row">
                   <div class="col-lg-12 col-md-12 col-sm-12">
                     <fieldset>
-                         <input class="form-control" name="txtsid" value="<?= AutoID('stu','sid','SID-',4) ?>" readonly>
+                         <input class="form-control" name="txtsid" value="<?= AutoID('stu','sid','SID-',4) ?>" hidden>
                     </fieldset>
                   </div>
 

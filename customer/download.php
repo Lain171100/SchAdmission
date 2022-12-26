@@ -2,40 +2,10 @@
     session_start();
     include('connect.php');
     include('autoid_functions.php'); 
-    // include('../admin/teacher_header.php');
-
-    
-
-    // Downloads files
-// if (isset($_GET['file_id'])) {
-//     $id = $_GET['file_id'];
-
-    // fetch file to download from database
-//     $sql = "SELECT * FROM doc_submit WHERE did=$id";
-//     $result = mysqli_query($connection, $sql);
-//     $count=mysqli_fetch_array($result);
-
-//     $appform=$count['appform'];
+    include('../admin/staff_header.php');
 
 
-//     $file = mysqli_fetch_assoc($result);
-//     $filepath = 'pdf_file/'.$appform;
-
-//     if (file_exists($filepath)) {
-//         header('Content-Description: File Transfer');
-//         header('Content-Type: application/pdf');
-//         header('Content-Disposition: attachment; filename='.basename($filepath));
-//         header('Expires: 0');
-//         header('Cache-Control: must-revalidate');
-//         header('Pragma: public');
-//         header('Content-Length: '.filesize('pdf_file/'.$appform));
-//         readfile('pdf_file/'.$appform);
-
-//         exit;
-//     }
-
-// }
-// ?>
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -50,7 +20,12 @@
 </head>
 <body>
     <?php
-        $sql="SELECT * from doc_submit";
+
+    if(isset($_GET['did']))
+    {
+        $did=$_GET['did'];
+        $sql="SELECT * from doc_submit
+              WHERE did='$did' ";
         $query=mysqli_query($connection,$sql);
         // 
         $count=mysqli_num_rows($query);
@@ -58,11 +33,12 @@
         while ($info=mysqli_fetch_array($query))
         {
 
+
     ?>
 
-
+ <div class="table-responsive">
     <table>
-
+    
     <tr>
         <th>Application Form</th>
         <th>Passport</th>
@@ -79,44 +55,46 @@
     <tr>
     
     <td>
-    <embed type="application/pdf" src="pdf_file/<?php echo $info['appform']; ?>" width="300" height="500">
+    <embed type="application/pdf" src="pdf_file/<?php echo $info['appform']; ?>" width="300" height="400">
     </td>
 
     <td>
-    <embed type="application/pdf" src="pdf_file/<?php echo $info['pass']; ?>" width="300" height="500">
+    <embed type="application/pdf" src="pdf_file/<?php echo $info['pass']; ?>" width="300" height="400">
     </td>
 
     <td>
-    <embed type="application/pdf" src="pdf_file/<?php echo $info['dip']; ?>" width="300" height="500">
+    <embed type="application/pdf" src="pdf_file/<?php echo $info['dip']; ?>" width="300" height="400">
     </td>
 
     <td>
-    <embed type="application/pdf" src="pdf_file/<?php echo $info['transcript']; ?>" width="300" height="500">
+    <embed type="application/pdf" src="pdf_file/<?php echo $info['transcript']; ?>" width="300" height="400">
     </td>
 
     <td>
-    <embed type="application/pdf" src="pdf_file/<?php echo $info['recom']; ?>" width="300" height="500">
+    <embed type="application/pdf" src="pdf_file/<?php echo $info['recom']; ?>" width="300" height="400">
     </td>
 
     <td>
-    <embed type="application/pdf" src="pdf_file/<?php echo $info['autobio']; ?>" width="300" height="500">
+    <embed type="application/pdf" src="pdf_file/<?php echo $info['autobio']; ?>" width="300" height="400">
     </td>
 
     <td>
-    <embed type="application/pdf" src="pdf_file/<?php echo $info['studyp']; ?>" width="300" height="500">
+    <embed type="application/pdf" src="pdf_file/<?php echo $info['studyp']; ?>" width="300" height="400">
     </td>
 
     <td>
-    <embed type="application/pdf" src="pdf_file/<?php echo $info['doc1']; ?>" width="300" height="500">
+    <embed type="application/pdf" src="pdf_file/<?php echo $info['doc1']; ?>" width="300" height="400">
     </td>
 
     <td>
-    <embed type="application/pdf" src="pdf_file/<?php echo $info['doc2']; ?>" width="300" height="500">
+    <embed type="application/pdf" src="pdf_file/<?php echo $info['doc2']; ?>" width="300" height="400">
     </td>
 
     </tr>     
     </table>
+    </div>
 <?php
+    }
     }
 ?>
 </body>

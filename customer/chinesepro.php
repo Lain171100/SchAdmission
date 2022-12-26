@@ -88,8 +88,8 @@
                 <div class="row">
                   <div class="col-lg-12 col-md-12 col-sm-12">
                     <fieldset>
-                        <label for="">Chinese Language ID</label>
-                        <input class="form-control" type="text" name="txtcid" placeholder="" value="<?= AutoID('c_language','cid','CTU-',4) ?>" readonly>
+                        <!-- <label for="">Chinese Language ID</label> -->
+                        <input class="form-control" type="text" name="txtcid" placeholder="" value="<?= AutoID('c_language','cid','CTU-',4) ?>" hidden>
                     </fieldset>
                   </div>
 

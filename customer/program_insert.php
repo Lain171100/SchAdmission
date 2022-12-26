@@ -27,7 +27,7 @@
             $updatedata=mysqli_query($connection,$updatesql);
             if ($updatedata)
             {
-                echo "<script>window.alert('Program Acccount Successfully Created.')</script>
+                echo "<script>window.alert('Program Data Successfully Created.')</script>
                 <script>window.location='scholar_insert.php'</script>";
             }
         }
@@ -90,8 +90,8 @@
                 <div class="row">
                   <div class="col-lg-12 col-md-12 col-sm-12">
                     <fieldset>
-                        <label for="">Program ID:</label>
-                        <input class="form-control" type="text" name="txtpid" value="<?= AutoID('program','pid','PID-',4) ?>" readonly>
+                        <!-- <label for="">Program ID:</label> -->
+                        <input class="form-control" type="text" name="txtpid" value="<?= AutoID('program','pid','PID-',4) ?>" hidden>
                     </fieldset>
                   </div>
 

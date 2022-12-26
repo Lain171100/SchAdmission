@@ -19,7 +19,7 @@
       
       if(empty($errors)==true){
          move_uploaded_file($file_tmp,"images/".$file_name);
-         echo "Success";
+         
       }else{
          print_r($errors);
       }
@@ -112,12 +112,14 @@
                         echo "<td>$studyp</td>";
                         echo "<td>$doc1</td>";
                         echo "<td>$doc2</td>";
-
+                        
+                        if ($stafftype=="Staff")
+                        {
                         echo "<td>
                                 
-                                <a href='download.php?did=$did'>Download</a>
+                                <a href='download.php?did=$did'>View</a>
                               </td>";
-                        
+                        }
                         echo "</tr>";
                     }
                 ?>

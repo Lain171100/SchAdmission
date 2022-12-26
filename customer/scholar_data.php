@@ -50,7 +50,7 @@
                      if ($stafftype=="Staff")
                     {
                     ?>
-                    <th scope="col">Actions</th>
+                    <!-- <th scope="col">Actions</th> -->
                     <?php
                     }
                     ?>
@@ -91,10 +91,10 @@
 
                         if ($stafftype=="Staff")
                         {
-                        echo "<td>
-                                <a href='scholar_update.php?slid=$slid' class='btn btn-outline-info'>Update</a> <br> <br>                             
-                                <a href='scholar_delete.php?slid=$slid' class='btn btn-outline-danger'>Delete</a>
-                              </td>";
+                        // echo "<td>
+                        //         <a href='scholar_update.php?slid=$slid' class='btn btn-outline-info'>Update</a> <br> <br>                             
+                        //         <a href='scholar_delete.php?slid=$slid' class='btn btn-outline-danger'>Delete</a>
+                        //       </td>";
                         }
                         echo "</tr>";
                     }

@@ -22,7 +22,7 @@
 
         if($rows)
         {
-          echo "<script>window.alert('Information Already Exists')</script>";
+          echo "<script>window.alert('Information Already Filled')</script>";
           echo "<script>window.location='update_all.php'</script>";
         }
       }
@@ -146,7 +146,7 @@
             $updatedata=mysqli_query($connection,$updatesql);
             if ($updatedata)
             {
-                echo "<script>window.alert('Student Data Successfully Created.')</script>
+                echo "<script>window.alert('Student Infomation Data Successfully Filled.')</script>
                 <script>window.location='eduback_insert.php'</script>";
             }
         }
@@ -204,8 +204,8 @@
                 <!-- Student ID -->
                   <div class="col-lg-12 col-md-12 col-sm-12">
                     <fieldset>
-                        <label for="">Student ID:</label>
-                        <input type="text" class="form-control"  name="txtstuid" id="" value="<?= AutoID('student','stuid','STU-',4) ?>" readonly>
+                        <!-- <label for="">Student ID:</label> -->
+                        <input type="text" class="form-control"  name="txtstuid" id="" value="<?= AutoID('student','stuid','STU-',4) ?>" hidden>
                     </fieldset>
                   </div>
                   
@@ -213,7 +213,7 @@
                   <div class="col-lg-12 col-md-12 col-sm-12">
                     <fieldset>
                         <label for="">Full Name (Chinese):</label>
-                        <input type="text" class="form-control"  name="txtstuCname" value="" placeholder="Enter Chinese Name">
+                        <input type="text" class="form-control"  name="txtstuCname" value="" placeholder="Enter Chinese Name" required>
                     </fieldset>
                   </div>
 

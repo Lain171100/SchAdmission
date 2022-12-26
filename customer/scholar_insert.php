@@ -28,13 +28,13 @@
             $updatedata=mysqli_query($connection,$updatesql);
             if ($updatedata)
             {
-                echo "<script>window.alert('Scholarship Account Successfully Created.')</script>
+                echo "<script>window.alert('Financial Statement and Scholar Info Successfully Created.')</script>
                 <script>window.location='docsubmit_insert.php'</script>";
             }
         }
         else
         {
-            echo "<p>Something went wrong in Scholarship Data Insert " . mysqli_error($connection) . "</p>";
+            echo "<p>Something went wrong in Financial Statement Data Created " . mysqli_error($connection) . "</p>";
         }
         
     }
@@ -89,8 +89,8 @@
                 <div class="row">
                   <div class="col-lg-12 col-md-12 col-sm-12">
                     <fieldset>
-                        <label for="">Scholar ID:</label>
-                        <input class="form-control" type="text" name="txtslid" value="<?= AutoID('scholar','slid','SLID-',4) ?>" readonly>
+                        <!-- <label for="">Scholar ID:</label> -->
+                        <input class="form-control" type="text" name="txtslid" value="<?= AutoID('scholar','slid','SLID-',4) ?>" hidden>
                     </fieldset>
                   </div>
 
@@ -98,7 +98,7 @@
                   <div class="col-lg-12 col-md-12 col-sm-12">
                     <fieldset>
                         <label for="" class="">Choose Your Personal Saving Amount: </label>
-                        <select name="cbopmoney" class="form-control">
+                        <select name="cbopmoney" class="form-control" required>
                             <option value="">Choose Money Amount</option>
                             <option value="US$0 - US$99">US$0 - US$99</option>
                             <option value="US$100 - US$1000">US$100 - US$1000</option>
@@ -120,7 +120,7 @@
                     <fieldset>
                       <br>
                         <label for="" class="">Choose Your Saving Money From Parents: </label>
-                        <select name="cbofmoney" class="form-control">
+                        <select name="cbofmoney" class="form-control" required>
                             <option value="">Choose Money Amount</option>
                             <option value="US$0 - US$99">US$0 - US$99</option>
                             <option value="US$100 - US$1000">US$100 - US$1000</option>
@@ -142,7 +142,7 @@
                     <fieldset>
                       <br>
                         <label for="" class="">Choose Your Scholarship Amount </label>
-                        <select name="cbosmoney" class="form-control">
+                        <select name="cbosmoney" class="form-control" required>
                             <option value="">Choose Money Amount</option>
                             <option value="US$0 - US$99">US$0 - US$99</option>
                             <option value="US$100 - US$1000">US$100 - US$1000</option>
@@ -164,7 +164,7 @@
                     <fieldset>
                       <br>
                         <label for="" class="">Choose Scholarship Department or Organization</label>
-                        <select name="cboorg" class="form-control">
+                        <select name="cboorg" class="form-control" required>
                             <option value="">Choose Organization</option>
                             <option value="MOE (Ministry of Education)">MOE (Ministry of Education)</option>
                             <option value="MOFA (Ministry of Foreign Affairs)">MOFA (Ministry of Foreign Affairs)</option>
@@ -179,7 +179,7 @@
                     <fieldset>
                       <br>
                       <label for="" class="">Choose Your Health Condition</label>
-                      <select name="cbohealth" class="form-control">
+                      <select name="cbohealth" class="form-control" required>
                             <option value="">Choose Your Health Condition</option>
                             <option value="Good">Good</option>
                             <option value="Average">Average</option>

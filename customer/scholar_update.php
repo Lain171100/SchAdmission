@@ -55,7 +55,7 @@
         $slquery=mysqli_query($connection,$update);
         if($slquery)
         {
-            echo "<script>window.alert('Financial Information and Scholar Information are Updated')</script>";
+            echo "<script>window.alert('Financial Information and Scholar Informations are Updated')</script>";
             echo "<script>window.location='update_all.php'</script>";
         }
         else{
@@ -74,7 +74,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scholar Update Form</title>
+    <title>Financial Statement and Scholar Information Update Form</title>
 </head>
 <body>
 
@@ -98,8 +98,8 @@
                 <div class="row">
                   <div class="col-lg-12 col-md-12 col-sm-12">
                     <fieldset>
-                        <label for="">Scholar ID:</label>
-                        <input class="form-control" type="text" name="txtslid" value="<?= $slid ?>" readonly>
+                        <!-- <label for="">Scholar ID:</label> -->
+                        <input class="form-control" type="text" name="txtslid" value="<?= $slid ?>" hidden>
                     </fieldset>
                   </div>
 
@@ -230,7 +230,7 @@
                     <fieldset>
                         <input type="text" name="txtstudentid" value="<?php echo $_SESSION['sid']; ?>" hidden>
                         <br>
-                        <button class="btn btn-primary" type="submit" name="btnupdate" value="Update">Update</button>
+                        <button class="btn btn-info" type="submit" name="btnupdate" value="Update">Update</button>
                         <button class="btn btn-danger" type="reset" name="btncancel" value="Cancel" onclick="location.href='update_all.php' ">Cancel</button>
                     </fieldset>
                   </div>

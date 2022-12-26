@@ -69,7 +69,7 @@
                     if ($stafftype=="Staff")
                     {
                     ?>
-                     <th scope="col">Actions</th>
+                     <!-- <th scope="col">Actions</th> -->
                     <?php
                     }
                     ?>
@@ -135,13 +135,14 @@
                         
                        if ($stafftype=="Staff")
                         {
-                            echo "<td>
-                                    <a href='student_update.php?stuid=$stuid' class='btn btn-outline-info'>Update</a> <br>
-                                    <br>
-                                    <a href='student_delete.php?stuid=$stuid' class='btn btn-outline-danger'>Delete</a>
-                                </td>";
+                            
 
                         }
+                        // echo "<td>
+                        //             <a href='student_update.php?stuid=$stuid' class='btn btn-outline-info'>Update</a> <br>
+                        //             <br>
+                        //             <a href='student_delete.php?stuid=$stuid' class='btn btn-outline-danger'>Delete</a>
+                        //         </td>";
 
                             echo "</tr>";
                         

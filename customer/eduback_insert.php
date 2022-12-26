@@ -111,7 +111,7 @@
                 <div class="row">
                   <div class="col-lg-12 col-md-12 col-sm-12">
                     <fieldset>
-                        <label for="" hidden>Educational Background ID</label>
+                        <!-- <label for="" hidden>Educational Background ID</label> -->
                         <input type="text" class="form-control" name="txteid" id="" value="<?= AutoID('eduback','eid','ETU-',4) ?>" hidden>
                     </fieldset>
                   </div>
